@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', {
         name: form.name,
         email: form.email,
         password: form.password,
-        amount: 0,
+        amount: Number(form.amount),
       };
 
       const savedUser = await signupUser(newUser);

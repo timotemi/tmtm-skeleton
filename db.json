@@ -37,8 +37,7 @@
       "type": "expense",
       "category": "식비",
       "amount": 12000,
-      "content": "점심",
-      "status": "completed"
+      "content": "점심"
     },
     {
       "id": 2,
@@ -47,8 +46,7 @@
       "type": "income",
       "category": "월급",
       "amount": 2000000,
-      "content": "4월 급여",
-      "status": "planned"
+      "content": "4월 급여"
     },
     {
       "id": 3,
@@ -57,8 +55,7 @@
       "type": "expense",
       "category": "카페",
       "amount": 6500,
-      "content": "아메리카노",
-      "status": "completed"
+      "content": "아메리카노"
     },
     {
       "id": 4,
@@ -67,8 +64,7 @@
       "type": "expense",
       "category": "보험",
       "amount": 120000,
-      "content": "보험료 납부 예정",
-      "status": "planned"
+      "content": "보험료 납부 예정"
     }
   ]
 }
