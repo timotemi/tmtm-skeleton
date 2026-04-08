@@ -1,19 +1,25 @@
 {
-  "posts": [
+  "user": {
+    "id": 1,
+    "name": "홍길동",
+    "email": "hong@example.com"
+  },
+  "transactions": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "date": "2026-04-07",
+      "type": "expense",
+      "category": "식비",
+      "amount": 12000,
+      "content": "점심"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 2,
+      "date": "2026-04-07",
+      "type": "income",
+      "category": "용돈",
+      "amount": 50000,
+      "content": "부모님 용돈"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
