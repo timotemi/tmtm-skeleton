@@ -1,25 +1,74 @@
 {
-  "user": {
-    "id": 1,
-    "name": "홍길동",
-    "email": "hong@example.com"
-  },
+  "users": [
+    {
+      "id": 1,
+      "name": "홍길동",
+      "email": "hong@example.com",
+      "password": "1234",
+      "amount": 1200000
+    },
+    {
+      "id": 2,
+      "name": "김철수",
+      "email": "kim@example.com",
+      "password": "1111",
+      "amount": 850000
+    },
+    {
+      "id": 3,
+      "name": "이영희",
+      "email": "lee@example.com",
+      "password": "2222",
+      "amount": 2300000
+    },
+    {
+      "name": "ㅈ",
+      "email": "w@w",
+      "password": "w",
+      "amount": 0,
+      "id": 4
+    }
+  ],
   "transactions": [
     {
       "id": 1,
+      "userId": 1,
       "date": "2026-04-07",
       "type": "expense",
       "category": "식비",
       "amount": 12000,
-      "content": "점심"
+      "content": "점심",
+      "status": "completed"
     },
     {
       "id": 2,
-      "date": "2026-04-07",
+      "userId": 1,
+      "date": "2026-04-09",
       "type": "income",
-      "category": "용돈",
-      "amount": 50000,
-      "content": "부모님 용돈"
+      "category": "월급",
+      "amount": 2000000,
+      "content": "4월 급여",
+      "status": "planned"
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "date": "2026-04-08",
+      "type": "expense",
+      "category": "카페",
+      "amount": 6500,
+      "content": "아메리카노",
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "userId": 3,
+      "date": "2026-04-13",
+      "type": "expense",
+      "category": "보험",
+      "amount": 120000,
+      "content": "보험료 납부 예정",
+      "status": "planned"
     }
   ]
 }
