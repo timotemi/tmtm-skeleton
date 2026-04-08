@@ -1,31 +1,56 @@
 <template>
   <div class="menu-grid">
-    <MenuCard
-      title="전체 거래 목록"
-      description="전체 거래내역을 조회하고 수정할 수 있어요."
-      @click="goTo('/transactions')"
-    />
-    <MenuCard
-      title="월별 수입/지출 요약"
-      description="월별 총 수입과 총 지출을 확인할 수 있어요."
-      @click="goTo('/monthly-summary')"
-    />
-    <MenuCard
-      title="새 거래 등록"
-      description="새로운 수입 또는 지출 내역을 직접 추가할 수 있어요."
-      @click="goTo('/transactions/new')"
-    />
-    <MenuCard
-      title="캘린더"
-      description="날짜별 거래 내역을 달력에서 확인할 수 있어요."
-      @click="goTo('/calendar')"
-    />
+    <router-link to="/transactions" class="menu-card">
+      <h3>최근 거래내역</h3>
+      <p>가장 최근 거래를 확인해보세요.</p>
+    </router-link>
+
+    <router-link to="/monthly-summary" class="menu-card">
+      <h3>월별 수입 및 지출 요약</h3>
+      <p>이번 달 흐름을 한눈에 확인하세요.</p>
+    </router-link>
+
+    <router-link to="/transactions" class="menu-card">
+      <h3>새 거래 등록</h3>
+      <p>새로운 수입 또는 지출을 추가하세요.</p>
+    </router-link>
+
+    <router-link to="/calendar" class="menu-card">
+      <h3>캘린더</h3>
+      <p>날짜별 거래내역을 달력에서 확인하세요.</p>
+    </router-link>
   </div>
 </template>
 
-<script setup>
-import { useRouter } from 'vue-router';
-import MenuCard from '@/components/common/MenuCard.vue';
-const router = useRouter();
-const goTo = (path) => router.push(path);
-</script>
+<style scoped>
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.menu-card {
+  display: block;
+  text-decoration: none;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  color: #111827;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-2px);
+}
+
+.menu-card h3 {
+  margin: 0 0 10px;
+}
+
+.menu-card p {
+  margin: 0;
+  color: #6b7280;
+}
+</style>

@@ -1,29 +1,36 @@
 <template>
   <header class="header">
-    <router-link to="/">홈</router-link>
+    <router-link to="/" class="logo">💰 BudgetApp</router-link>
 
-    <div v-if="authStore.isLogin">
-      <span>{{ authStore.user.name }}님</span>
-      <router-link to="/mypage">마이페이지</router-link>
-      <button @click="logout">로그아웃</button>
-    </div>
-
-    <div v-else>
-      <router-link to="/login">로그인</router-link>
-      <router-link to="/signup">회원가입</router-link>
-    </div>
+    <router-link to="/mypage" class="mypage-icon">👤</router-link>
   </header>
 </template>
 
-<script setup>
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
+<style scoped>
+.header {
+  position: fixed;
+  top: 0;
+  left: 220px;
+  right: 0;
+  height: 70px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+}
 
-const authStore = useAuthStore();
-const router = useRouter();
+.logo {
+  text-decoration: none;
+  color: #111827;
+  font-size: 22px;
+  font-weight: 700;
+}
 
-const logout = () => {
-  authStore.logout();
-  router.push('/login');
-};
-</script>
+.mypage-icon {
+  text-decoration: none;
+  font-size: 28px;
+}
+</style>
