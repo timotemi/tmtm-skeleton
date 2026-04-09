@@ -1,13 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "홍길동",
-      "email": "hong@example.com",
-      "password": "1234",
-      "amount": 1200000
-    },
-    {
       "id": 2,
       "name": "김철수",
       "email": "kim@example.com",
@@ -27,27 +20,16 @@
       "password": "w",
       "amount": 0,
       "id": 4
+    },
+    {
+      "name": "성범진",
+      "email": "1@1",
+      "password": "1",
+      "amount": 100000000,
+      "id": 5
     }
   ],
   "transactions": [
-    {
-      "id": 1,
-      "userId": 1,
-      "date": "2026-04-07",
-      "type": "expense",
-      "category": "식비",
-      "amount": 12000,
-      "content": "점심"
-    },
-    {
-      "id": 2,
-      "userId": 1,
-      "date": "2026-04-09",
-      "type": "income",
-      "category": "월급",
-      "amount": 2000000,
-      "content": "4월 급여"
-    },
     {
       "id": 3,
       "userId": 2,
@@ -55,7 +37,8 @@
       "type": "expense",
       "category": "카페",
       "amount": 6500,
-      "content": "아메리카노"
+      "content": "아메리카노",
+      "status": "completed"
     },
     {
       "id": 4,
@@ -64,7 +47,8 @@
       "type": "expense",
       "category": "보험",
       "amount": 120000,
-      "content": "보험료 납부 예정"
+      "content": "보험료 납부 예정",
+      "status": "planned"
     }
   ]
 }

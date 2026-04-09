@@ -1,126 +1,176 @@
 <template>
-  <div class="auth-container">
-    <h2>회원가입</h2>
+  <div class="auth-page">
+    <div class="auth-card">
+      <h1>회원가입</h1>
 
-    <form @submit.prevent="onSignup" class="auth-form">
-      <div>
+      <form class="auth-form" @submit.prevent="handleSignup">
         <label>이름</label>
-        <input v-model="name" type="text" />
-      </div>
+        <input v-model="form.name" type="text" />
 
-      <div>
         <label>이메일</label>
-        <input v-model="email" type="email" />
-      </div>
+        <input v-model="form.email" type="email" />
 
-      <div>
         <label>비밀번호</label>
-        <input v-model="password" type="password" />
-      </div>
+        <input v-model="form.password" type="password" />
 
-      <div>
-        <label>비밀번호 확인</label>
-        <input v-model="passwordCheck" type="password" />
-      </div>
+        <label>초기 금액</label>
+        <input v-model="form.amount" type="number" />
 
-      <div>
-        <label>초기 잔액</label>
-        <input v-model="amount" type="number" min="0" />
-      </div>
+        <button type="submit" class="signup-btn">회원가입</button>
+      </form>
 
-      <button type="submit">회원가입</button>
-    </form>
-
-    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-
-    <router-link to="/login">로그인 하러가기</router-link>
+      <router-link to="/login" class="auth-link"> 로그인 하러가기 </router-link>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { reactive } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
-const name = ref('');
-const email = ref('');
-const password = ref('');
-const passwordCheck = ref('');
-const amount = ref(0);
-const errorMessage = ref('');
-
-const router = useRouter();
 const authStore = useAuthStore();
+const router = useRouter();
 
-const onSignup = async () => {
-  errorMessage.value = '';
+const form = reactive({
+  name: '',
+  email: '',
+  password: '',
+  amount: 0,
+});
 
-  if (!name.value || !email.value || !password.value || !passwordCheck.value) {
-    errorMessage.value = '모든 항목을 입력하세요.';
-    return;
-  }
-
-  if (password.value !== passwordCheck.value) {
-    errorMessage.value = '비밀번호가 일치하지 않습니다.';
-    return;
-  }
-
-  if (Number(amount.value) < 0) {
-    errorMessage.value = '잔액은 0 이상이어야 합니다.';
-    return;
-  }
-
+const handleSignup = async () => {
   try {
-    await authStore.signup({
-      name: name.value,
-      email: email.value,
-      password: password.value,
-      amount: amount.value,
-    });
-
+    await authStore.signup(form);
     alert('회원가입이 완료되었습니다.');
     router.push('/login');
   } catch (error) {
-    errorMessage.value = error.message;
+    alert(error.message || '회원가입에 실패했습니다.');
   }
 };
 </script>
 
 <style scoped>
-.auth-container {
-  max-width: 420px;
-  margin: 80px auto;
-  padding: 30px;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 560px;
+  padding: 42px 36px;
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.14);
+}
+
+.auth-card h1 {
+  margin: 0 0 28px;
+  font-size: 38px;
+  font-weight: 800;
+  color: #111827;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin: 20px 0;
 }
 
-input {
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 6px;
-  padding: 10px;
-}
-
-button {
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background: #2563eb;
-  color: white;
+.auth-form label {
+  font-size: 15px;
   font-weight: 700;
-  cursor: pointer;
+  color: #1f2937;
 }
 
-.error {
-  color: #dc2626;
+.auth-form input {
+  height: 52px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  background: rgba(255, 255, 255, 0.52);
+  color: #111827;
+  font-size: 15px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.auth-form input:focus {
+  border-color: rgba(34, 197, 94, 0.45);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.16);
+}
+
+.signup-btn {
+  margin-top: 8px;
+  height: 52px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.22);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(22, 163, 74, 0.28);
+  opacity: 0.97;
+}
+
+.auth-link {
+  display: inline-block;
+  margin-top: 24px;
+  color: #4f46e5;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.auth-link:hover {
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .auth-card {
+    padding: 30px 20px;
+    border-radius: 22px;
+  }
+
+  .auth-card h1 {
+    font-size: 30px;
+  }
 }
 </style>
