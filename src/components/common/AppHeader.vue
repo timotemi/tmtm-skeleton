@@ -2,9 +2,25 @@
   <header class="header">
     <router-link to="/" class="logo">💰 ㅌㅁㅌㅁ</router-link>
 
-    <router-link to="/mypage" class="mypage-icon">👤</router-link>
+    <div class="header-actions">
+      <button
+        class="theme-toggle"
+        type="button"
+        @click="themeStore.toggleTheme"
+      >
+        {{ themeStore.isDark ? '☀️ 라이트' : '🌙 다크' }}
+      </button>
+
+      <router-link to="/mypage" class="mypage-icon">👤</router-link>
+    </div>
   </header>
 </template>
+
+<script setup>
+import { useThemeStore } from '@/stores/theme';
+
+const themeStore = useThemeStore();
+</script>
 
 <style scoped>
 .header {
@@ -13,8 +29,8 @@
   left: 0px;
   right: 0;
   height: 70px;
-  background: rgba(255, 255, 255, 0.78);
-  border-bottom: 1px solid rgba(229, 231, 235, 0.7);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,7 +42,7 @@
 
 .logo {
   text-decoration: none;
-  color: #111827;
+  color: var(--text-main);
   font-size: 22px;
   font-weight: 700;
   transition:
@@ -37,6 +53,36 @@
 .logo:hover {
   transform: translateY(-2px);
   opacity: 0.85;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--panel-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  background: var(--card-bg-hover);
+  box-shadow: var(--shadow-soft);
 }
 
 .mypage-icon {

@@ -44,14 +44,14 @@
 
   text-align: center;
   text-decoration: none;
-  color: #111827;
+  color: var(--text-main);
   min-height: 150px;
   padding: 20px;
   border-radius: 20px;
 
-  background: rgba(255, 255, 255, 0.28);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-soft);
 
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -65,9 +65,8 @@
 
 .menu-card:hover {
   transform: translateY(-5px) scale(1.02);
-  background: rgba(255, 255, 255, 0.4);
-  border-color: rgba(255, 255, 255, 0.32);
-  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.12);
+  background: var(--card-bg-hover);
+  box-shadow: var(--shadow-medium);
 }
 
 .menu-icon {
@@ -84,7 +83,7 @@
 
 .menu-card p {
   margin: 0;
-  color: #4b5563;
+  color: var(--text-soft);
   font-size: 13px;
   line-height: 1.45;
 }
