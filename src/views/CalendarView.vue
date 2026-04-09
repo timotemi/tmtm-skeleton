@@ -60,28 +60,29 @@
                 border: isSelected(item) ? '2px solid red' : '1px solid gray',
               }"
             >
-              {{ item }}
+              <div>{{ item }}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 6. "+"" 버튼 fixed로 고정 시키기 -->
+    <!-- 7-1. "+"" 버튼 fixed로 고정 시키기 -->
     <button
       style="
-        font-size: 25px;
+        font-size: 50px;
         position: fixed;
-        right: 100px;
+        right: 200px;
         top: 200px;
-        border-radius: 100px;
+        border-radius: 10px;
       "
-      ;
       @click=""
     >
       +
     </button>
-    <!-- 상세 모달 -->
+    <!-- 6-3. 상세 모달 창, 텍스트 중앙 정렬  영역외에 어둡게, 블러 처리
+     
+    -->
     <div
       v-if="isDetailModalOpen"
       style="
@@ -118,19 +119,27 @@
             margin-bottom: 20px;
           "
         >
-          <h3>{{ selectedDate.getDate() }}일 상세내역</h3>
+          <h3>
+            {{ selectedDate.getMonth() + 1 }}월 {{ selectedDate.getDate() }}일
+            상세내역
+          </h3>
           <button @click="isDetailModalOpen = false">닫기</button>
         </div>
 
-        <div>여기에 데이터 들어갈 예정</div>
+        <div v-for="item in selectedTransactions" :key="item.id">
+          <span
+            >{{ item.category }}, {{ item.content }}, {{ item.amount }}원</span
+          >
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-
+// 6-7.
+import { ref, computed, onMounted } from 'vue';
+import axios from 'axios';
 const weekDays = ['일', '월', '화', '수', '목', '금', '토']; // 1-1. 월화수목금토일 값 주기
 
 // 2-1 기준 날짜 가져오기
@@ -249,6 +258,15 @@ const isToday = (item) => {
 // 5-3. 현재 날짜 받기
 const selectedDate = ref(new Date());
 
+// 6-6. Date 객체를 "YYYY-MM-DD" 문자열로 바꾸는 함수 여기 중요 이해 못함
+const formatDate = (dateObj) => {
+  const y = dateObj.getFullYear();
+  const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const d = String(dateObj.getDate()).padStart(2, '0');
+
+  return `${y}-${m}-${d}`;
+};
+
 const isSelected = function (item) {
   if (!item) return false;
 
@@ -266,11 +284,39 @@ const selectDate = function (item) {
   selectedDate.value = new Date(year.value, month.value, item);
 
   // 6-2. 현재 날짜 클릭시 모달 값 true로 변경
+
+  // 6-5. 선택했을때 보여줄 데이터들
+  const targetDate = formatDate(selectedDate.value);
+
+  selectedTransactions.value = transactions.value.filter((item) => {
+    return item.date === targetDate;
+  });
+  console.log(selectedTransactions.value);
   isDetailModalOpen.value = true;
 };
 
 // 6-1. 달력 일자에 모달 달기
 const isDetailModalOpen = ref(false);
+
+// 6-4. 전체 거래목록에서 일자 내역 CRUD
+const transactions = ref([]); // 전체 거래 내역
+const selectedTransactions = ref([]); // 선택된 거래내역
+
+// 6-8. 데이터 읽기 axios C"R"UD , 에러 처리
+const getTransactions = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/transactions');
+    transactions.value = response.data;
+    console.log('거래목록:', transactions.value);
+  } catch (error) {
+    console.log('거래내역 불러오기 실패');
+    console.log(error);
+  }
+};
+
+onMounted(() => {
+  getTransactions();
+});
 </script>
 
 <style scoped>
