@@ -46,7 +46,12 @@ const showLayout = computed(() => {
 
 .auth-content {
   min-height: 100vh;
-  background: #f9fafb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 @media (max-width: 768px) {
