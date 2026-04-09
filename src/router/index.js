@@ -28,7 +28,6 @@ const router = createRouter({
       path: '/calendar',
       name: 'calendar',
       component: CalendarView,
-      meta: { requiresAuth: true },
     },
     {
       path: '/transactions',
