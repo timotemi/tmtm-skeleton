@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-shell">
     <template v-if="showLayout">
       <SideBar />
       <AppHeader />
@@ -25,15 +25,34 @@ const showLayout = computed(() => {
 </script>
 
 <style scoped>
+.app-shell {
+  min-height: 100vh;
+  background-image: url('@/assets/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
 .main-content {
   margin-left: 220px;
   margin-top: 70px;
-  min-height: 100vh;
-  background: #f9fafb;
+  width: calc(100% - 220px);
+  height: calc(100vh - 70px);
+  overflow: hidden;
+  background: transparent;
 }
 
 .auth-content {
   min-height: 100vh;
   background: #f9fafb;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
 }
 </style>
