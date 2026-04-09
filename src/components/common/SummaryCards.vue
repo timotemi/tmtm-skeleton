@@ -50,28 +50,44 @@ const formatMoney = (value) => {
 <style scoped>
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
+  grid-template-columns: repeat(4, minmax(140px, 180px));
+  justify-content: center;
+  gap: 14px;
 }
 
 .card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.46);
+  border-color: rgba(255, 255, 255, 0.34);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.1);
 }
 
 .label {
-  margin: 0 0 10px;
+  margin: 0 0 6px;
   color: #6b7280;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 h3 {
   margin: 0;
-  font-size: 24px;
+  font-size: 18px;
   color: #111827;
+  font-weight: 800;
 }
 </style>
