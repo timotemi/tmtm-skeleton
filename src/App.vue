@@ -27,11 +27,9 @@ const showLayout = computed(() => {
 <style scoped>
 .app-shell {
   min-height: 100vh;
-  background-image: url('@/assets/images/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.18)),
+    url('@/assets/images/background.jpg') center / cover no-repeat fixed;
   overflow: hidden;
 }
 
@@ -49,7 +47,7 @@ const showLayout = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-overlay);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }

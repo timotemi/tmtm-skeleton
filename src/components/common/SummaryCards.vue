@@ -58,9 +58,9 @@ const formatMoney = (value) => {
 .card {
   padding: 14px 16px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.34);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-soft);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition:
@@ -72,14 +72,13 @@ const formatMoney = (value) => {
 
 .card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.46);
-  border-color: rgba(255, 255, 255, 0.34);
-  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg-hover);
+  box-shadow: var(--shadow-medium);
 }
 
 .label {
   margin: 0 0 6px;
-  color: #6b7280;
+  color: var(--text-sub);
   font-size: 12px;
   font-weight: 600;
 }
@@ -87,7 +86,7 @@ const formatMoney = (value) => {
 h3 {
   margin: 0;
   font-size: 18px;
-  color: #111827;
+  color: var(--text-main);
   font-weight: 800;
 }
 </style>

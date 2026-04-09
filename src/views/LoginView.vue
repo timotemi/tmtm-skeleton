@@ -58,9 +58,9 @@ const handleLogin = async () => {
   padding: 42px 36px;
   border-radius: 28px;
 
-  background: rgba(255, 255, 255, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow-strong);
 
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -73,15 +73,15 @@ const handleLogin = async () => {
 
 .auth-card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.14);
+  background: var(--panel-bg-strong);
+  box-shadow: var(--shadow-strong);
 }
 
 .auth-card h1 {
   margin: 0 0 28px;
   font-size: 38px;
   font-weight: 800;
-  color: #111827;
+  color: var(--text-main);
 }
 
 .auth-form {
@@ -93,16 +93,16 @@ const handleLogin = async () => {
 .auth-form label {
   font-size: 15px;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--text-main);
 }
 
 .auth-form input {
   height: 52px;
   padding: 0 16px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.36);
-  background: rgba(255, 255, 255, 0.52);
-  color: #111827;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-main);
   font-size: 15px;
   outline: none;
   transition:
@@ -112,9 +112,8 @@ const handleLogin = async () => {
 }
 
 .auth-form input:focus {
-  border-color: rgba(59, 130, 246, 0.5);
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.16);
 }
 
 .login-btn {
@@ -122,7 +121,7 @@ const handleLogin = async () => {
   height: 52px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
   color: white;
   font-size: 16px;
   font-weight: 800;
@@ -136,14 +135,13 @@ const handleLogin = async () => {
 
 .login-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 28px rgba(37, 99, 235, 0.3);
   opacity: 0.97;
 }
 
 .auth-link {
   display: inline-block;
   margin-top: 24px;
-  color: #4f46e5;
+  color: var(--primary);
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
