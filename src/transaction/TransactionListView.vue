@@ -16,7 +16,7 @@ import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useTransactionStore } from '@/stores/transactionStore'
 import TransactionItem from '@/transaction/TransactionItem.vue'
-import FilterPane1 from '@/transaction/FilterPane1.vue'
+import FilterPane1 from '@/components/FilterPane1.vue'
 
 const route = useRoute()
 const store = useTransactionStore()
