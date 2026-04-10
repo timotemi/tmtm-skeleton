@@ -8,7 +8,6 @@ import TransactionListView from '@/views/TransactionListView.vue';
 import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import MonthlySummaryView from '@/views/MonthlySummaryView.vue';
 import ChatbotView from '@/views/ChatbotView.vue';
-// 아래: 기록 추가 및 수정 구역
 import ExpenseInput from '@/components/transaction/trnsac-form-pages/inputs/ExpenseInput.vue';
 import IncomeInput from '@/components/transaction/trnsac-form-pages/inputs/IncomeInput.vue';
 import TransferInput from '@/components/transaction/trnsac-form-pages/inputs/TransferInput.vue';
@@ -51,10 +50,13 @@ const router = createRouter({
       name: 'transactions',
       component: TransactionForm,
       meta: { requiresAuth: true },
-      // 자식 라우트 시작
       children: [
         {
-          path: 'expense', // 최종 주소: /transactions/expense
+          path: '',
+          redirect: { name: 'expense-input' },
+        },
+        {
+          path: 'expense',
           name: 'expense-input',
           components: {
             default: ExpenseInput,
@@ -62,7 +64,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'income', // 최종 주소: /transactions/income
+          path: 'income',
           name: 'income-input',
           components: {
             default: IncomeInput,
@@ -70,7 +72,7 @@ const router = createRouter({
           },
         },
         {
-          path: 'transfer', // 최종 주소: /transactions/transfer
+          path: 'transfer',
           name: 'transfer-input',
           components: {
             default: TransferInput,
@@ -79,15 +81,12 @@ const router = createRouter({
         },
       ],
     },
-
     {
       path: '/monthly-summary',
       name: 'monthly-summary',
       component: MonthlySummaryView,
       meta: { requiresAuth: true },
     },
-
-    // 아래: 기록 받아오는 구역
     {
       path: '/calender/:id',
       component: ExpenseSelect,
