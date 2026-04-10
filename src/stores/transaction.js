@@ -1,93 +1,123 @@
-import { ref, computed, reactive } from 'vue';
+import { ref, reactive } from 'vue';
 import { defineStore } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
-import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
+import { createTransaction } from '@/api/transaction';
+import { CATEGORY_OPTIONS } from '@/stores/transactionStore';
 
-// Store 정의 - 'counter'는 스토어의 이름(고유식별자)
-export const useMoneyStore = defineStore('transaction', () => {
+export const useMoneyStore = defineStore('transactionForm', () => {
   const authStore = useAuthStore();
-  const BASEURL = '/api/transactions';
   const currentRoute = useRoute();
   const router = useRouter();
 
-  const userid = authStore.user.email;
-
-  // 1. Form 입력용/수정용 함수
   const isEditMode = ref(false);
+  const editingTransaction = ref(null);
+  const currentId = ref(null);
 
-  // 1-1. 입력용
-  const transaction = reactive({
-    // id: Date.now(),
-    userId: userid,
+  const createInitialTransaction = () => ({
+    userId: authStore.user?.id ?? null,
     date: new Date().toISOString().split('T')[0],
-    type: '',
+    type: 'expense',
     category: '',
     amount: 0,
     content: '',
   });
 
-  // 1-2. 수정용
-  const editingTransaction = ref(null);
-  const currentId = ref(null);
+  const transaction = reactive(createInitialTransaction());
 
-  // 2. 입력 함수
+  const resetTransaction = () => {
+    const currentType = transaction.type || 'expense';
+    const nextData = createInitialTransaction();
+
+    transaction.userId = nextData.userId;
+    transaction.date = nextData.date;
+    transaction.type = currentType;
+    transaction.category = '';
+    transaction.amount = 0;
+    transaction.content = '';
+  };
+
+  const setType = (type) => {
+    transaction.type = type;
+
+    const availableCategories = CATEGORY_OPTIONS[type] || [];
+    const isValid = availableCategories.some(
+      (item) => item.id === transaction.category,
+    );
+
+    if (!isValid) {
+      transaction.category = '';
+    }
+  };
+
+  const addExpense = () => {
+    setType('expense');
+  };
+
+  const addIncome = () => {
+    setType('income');
+  };
+
   const addTransaction = async (isContinue = false) => {
     try {
-      // 1. 서버에 데이터 전송
-      await axios.post(BASEURL, transaction);
+      if (!authStore.user?.id) {
+        alert('로그인 정보가 없습니다.');
+        return;
+      }
 
-      // 2. 입력 칸 비우기 (어떤 버튼을 누르든 공통으로 비웁니다)
-      transaction.amount = 0;
-      transaction.category = '';
-      transaction.content = '';
-      transaction.date = new Date().toISOString().split('T')[0];
-      // type은 유지하는 것이 연속 입력 시 편리할 수 있습니다 (지출 계속 입력 등)
+      if (!transaction.date) {
+        alert('날짜를 선택해주세요.');
+        return;
+      }
+
+      if (!transaction.category) {
+        alert('카테고리를 선택해주세요.');
+        return;
+      }
+
+      if (!transaction.amount || Number(transaction.amount) <= 0) {
+        alert('금액을 올바르게 입력해주세요.');
+        return;
+      }
+
+      if (!transaction.content.trim()) {
+        alert('내용을 입력해주세요.');
+        return;
+      }
+
+      const payload = {
+        userId: authStore.user.id,
+        date: transaction.date,
+        type: transaction.type,
+        category: transaction.category,
+        amount: Number(transaction.amount),
+        content: transaction.content.trim(),
+      };
+
+      await createTransaction(payload);
+
+      resetTransaction();
 
       if (isContinue) {
-        // ✅ '계속' 버튼을 누른 경우: 페이지 이동 없이 알림만 띄움
         alert('저장되었습니다. 계속 입력하세요.');
       } else {
-        // ✅ '저장' 버튼을 누른 경우: 목록으로 이동
         alert('저장완료');
         router.push({ name: 'transactions-list' });
       }
     } catch (error) {
       console.error('저장실패:', error);
+      alert('저장에 실패했습니다.');
     }
   };
 
-  // 2-1. 지출
-  const addExpense = () => {
-    transaction.type = 'expense';
-    console.log(transaction);
-  };
-
-  // 2-1. 지출
-  const addIncome = () => {
-    transaction.type = 'income';
-    console.log(transaction);
-  };
-
-  // 3. 기록 클릭했을때 불러오는 함수
   const getTransaction = async () => {
-    const transactionId = parseInt(currentRoute.params.id, 10);
-    const response = await axios.get(BASEURL + `/${transactionId}`);
-    editingTransaction.value = response.data;
-    currentId.value = transactionId;
+    console.log('현재 수정 라우트 id:', currentRoute.params.id);
   };
 
-  // 4. 수정 함수
   const editTransaction = async () => {
-    // console.log(editingTransaction.value);
-    let response = await axios.patch(
-      BASEURL + `/${currentId.value}`,
-      editingTransaction.value,
-    );
-    console.log(response);
+    console.log('editTransaction은 아직 연결 전입니다.');
   };
 
-  // 사용할 상태와 메소드 반환
   return {
     isEditMode,
     transaction,
@@ -100,5 +130,7 @@ export const useMoneyStore = defineStore('transaction', () => {
     currentId,
     addExpense,
     addIncome,
+    setType,
+    resetTransaction,
   };
 });
