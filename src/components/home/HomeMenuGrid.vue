@@ -1,10 +1,11 @@
 <template>
-  <div class="menu-grid">
-    <router-link to="/transactions-list" class="menu-card">
-      <div class="menu-icon">📋</div>
-      <h3>최근 거래내역</h3>
-      <p>가장 최근 거래를 확인해보세요.</p>
-    </router-link>
+  <div class="home-menu-wrap">
+    <div class="menu-grid">
+      <router-link to="/transactions" class="menu-card">
+        <div class="menu-icon">📋</div>
+        <h3>최근 거래내역</h3>
+        <p>가장 최근 거래를 확인해보세요.</p>
+      </router-link>
 
       <router-link to="/monthly-summary" class="menu-card">
         <div class="menu-icon">📊</div>
@@ -46,7 +47,7 @@
   grid-template-columns: repeat(2, minmax(220px, 420px));
   justify-content: center;
   gap: 22px;
-  max-width: 820px;
+  max-width: 920px;
   margin: 0 auto;
 }
 
