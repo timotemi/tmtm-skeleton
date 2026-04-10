@@ -87,7 +87,8 @@
       "amount": 8765,
       "content": "",
       "id": 6
-      "id": 5,
+    },
+    {
       "userId": 2,
       "date": "2026-04-01",
       "type": "income",
