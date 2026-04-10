@@ -19,24 +19,17 @@
   top: 70px;
   left: 0;
   width: 220px;
-  height: 100vh;
+  height: calc(100vh - 70px);
   padding: 24px 16px;
   box-sizing: border-box;
   z-index: 120;
 
-  background: rgba(255, 255, 255, 0.12);
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
   box-shadow: 8px 0 24px rgba(0, 0, 0, 0.05);
 
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-}
-
-.sidebar-title {
-  margin: 0 0 24px;
-  font-size: 22px;
-  font-weight: 800;
-  color: #111827;
 }
 
 .menu-list {
@@ -47,11 +40,11 @@
 
 .menu-item {
   text-decoration: none;
-  color: #1f2937;
+  color: var(--text-main);
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   transition:
     transform 0.2s ease,
     background 0.2s ease,
@@ -60,14 +53,14 @@
 
 .menu-item:hover {
   transform: translateX(4px);
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+  background: var(--card-bg-hover);
+  box-shadow: var(--shadow-soft);
 }
 
 .menu-item.router-link-exact-active {
-  background: rgba(134, 239, 172, 0.32);
-  color: #166534;
+  background: var(--menu-active-bg);
+  color: var(--menu-active-text);
   font-weight: 700;
-  border-color: rgba(134, 239, 172, 0.4);
+  border-color: var(--menu-active-border);
 }
 </style>
