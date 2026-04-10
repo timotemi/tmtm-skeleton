@@ -51,16 +51,51 @@
               :key="index"
               @click="selectDate(item)"
               :style="{
-                /* border: '1px solid gray', 5-4 반복되는 div칸에 값 비교후 적용 */
                 height: '100px',
                 textAlign: 'center',
                 boxSizing: 'border-box',
                 color: getDayColor(index),
                 backgroundColor: isToday(item) ? 'lightyellow' : null,
                 border: isSelected(item) ? '2px solid red' : '1px solid gray',
+                padding: '4px',
               }"
             >
-              <div>{{ item }}</div>
+              <div style="font-size: 16px">
+                {{ item }}
+              </div>
+
+              <div
+                v-if="item"
+                style="
+                  margin-top: 6px;
+                  font-size: 12px;
+                  line-height: 1.3;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 2px;
+                "
+              >
+                <!-- 8-2. 달력의 일 (item) 한칸에 보여줄 수입, 지출
+                 숫자 형식지정 (format) -->
+                <div v-if="getIncomeAmountByDate(item) > 0" style="color: blue">
+                  {{ formatNumber(getIncomeAmountByDate(item)) }}
+                </div>
+
+                <div v-if="getExpenseAmountByDate(item) > 0" style="color: red">
+                  {{ formatNumber(getExpenseAmountByDate(item)) }}
+                </div>
+
+                <!-- 8-3.합계 표시 조건 수입,지출 모두 존재할때만 합계 보여주기  -->
+                <div
+                  v-if="
+                    getIncomeAmountByDate(item) > 0 &&
+                    getExpenseAmountByDate(item) > 0
+                  "
+                >
+                  {{ formatNumber(getTotalAmountByDate(item)) }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -123,13 +158,56 @@
             {{ selectedDate.getMonth() + 1 }}월 {{ selectedDate.getDate() }}일
             상세내역
           </h3>
+          <button @click="">+</button>
           <button @click="isDetailModalOpen = false">닫기</button>
         </div>
 
         <div v-for="item in selectedTransactions" :key="item.id">
-          <span
-            >{{ item.category }}, {{ item.content }}, {{ item.amount }}원</span
-          >
+          <div v-if="editingId !== item.id">
+            <span>
+              {{ item.category }}, {{ item.content }},
+              {{ formatNumber(item.amount) }}원
+            </span>
+          </div>
+
+          <div v-else style="display: flex; gap: 6px; align-items: center">
+            <input
+              v-model="editForm.category"
+              type="text"
+              style="width: 80px"
+            />
+            <input
+              v-model="editForm.content"
+              type="text"
+              style="width: 120px"
+            />
+            <input
+              v-model.number="editForm.amount"
+              type="number"
+              style="width: 100px"
+            />
+          </div>
+          <!-- 10-1. 삭제 수정 버튼만들기  -->
+          <div v-if="editingId !== item.id">
+            <button @click="startEdit(item)">수정</button>
+            <button @click="deleteTransaction(item.id)">삭제</button>
+          </div>
+
+          <div v-else>
+            <button @click="saveEdit(item.id)">저장</button>
+            <button @click="cancelEdit">취소</button>
+          </div>
+        </div>
+        <div style="margin-top: 20px">
+          <div v-if="selectedIncomeTotal > 0">
+            수입 {{ selectedIncomeTotal }}원
+          </div>
+          <div v-if="selectedExpenseTotal > 0">
+            지출 {{ selectedExpenseTotal }}원
+          </div>
+          <div v-if="selectedIncomeTotal > 0 && selectedExpenseTotal > 0">
+            합계 {{ selectedTotal }}원
+          </div>
         </div>
       </div>
     </div>
@@ -313,10 +391,123 @@ const getTransactions = async () => {
     console.log(error);
   }
 };
-
 onMounted(() => {
   getTransactions();
 });
+
+// 8-1. 날짜별 수입/지출/합계 계산 함수
+// 날짜 문자열 만들기
+const getDateStringByItem = (item) => {
+  if (!item) return '';
+
+  const dateObj = new Date(year.value, month.value, item);
+  return formatDate(dateObj);
+};
+
+// 수입 합계
+const getIncomeAmountByDate = (item) => {
+  if (!item) return 0;
+
+  const targetDate = getDateStringByItem(item);
+
+  return transactions.value
+    .filter((tx) => tx.date === targetDate && tx.type === 'income')
+    .reduce((sum, tx) => sum + tx.amount, 0);
+};
+
+// 지출 합계
+const getExpenseAmountByDate = (item) => {
+  if (!item) return 0;
+
+  const targetDate = getDateStringByItem(item);
+
+  return transactions.value
+    .filter((tx) => tx.date === targetDate && tx.type === 'expense')
+    .reduce((sum, tx) => sum + tx.amount, 0);
+};
+
+// 합계 (수입 - 지출)
+const getTotalAmountByDate = (item) => {
+  return getIncomeAmountByDate(item) - getExpenseAmountByDate(item);
+};
+// 숫자 표시 형식 지정 #,### 1,234
+const formatNumber = (num) => {
+  return num.toLocaleString();
+};
+
+// 9-1. 상세 모달 내역 삭제
+const deleteTransaction = async (id) => {
+  if (!confirm('삭제하시겠습니까?')) return; // 안전 장치
+  try {
+    await axios.delete(`http://localhost:3000/transactions/${id}`); // 삭제
+
+    await getTransactions(); // 삭제 후 목록 다시 불러오기
+
+    const targetDate = formatDate(selectedDate.value);
+
+    selectedTransactions.value = transactions.value.filter((item) => {
+      return item.date === targetDate;
+    });
+
+    if (selectedTransactions.value.length === 0) {
+      isDetailModalOpen.value = false;
+    }
+  } catch (error) {
+    console.log('거래내역 삭제 실패');
+    console.log(error);
+  }
+};
+
+// 10-2. prompt 방식으로 거래 수정
+const editingId = ref(null);
+
+const editForm = ref({
+  category: '',
+  content: '',
+  amount: 0,
+});
+const startEdit = (item) => {
+  editingId.value = item.id;
+  editForm.value = {
+    category: item.category,
+    content: item.content,
+    amount: item.amount,
+  };
+};
+const cancelEdit = () => {
+  editingId.value = null;
+  editForm.value = {
+    category: '',
+    content: '',
+    amount: 0,
+  };
+};
+const saveEdit = async (id) => {
+  try {
+    await axios.patch(`http://localhost:3000/transactions/${id}`, {
+      category: editForm.value.category,
+      content: editForm.value.content,
+      amount: Number(editForm.value.amount),
+    });
+
+    await getTransactions();
+
+    const targetDate = formatDate(selectedDate.value);
+    selectedTransactions.value = transactions.value.filter((tx) => {
+      return tx.date === targetDate;
+    });
+
+    editingId.value = null;
+    editForm.value = {
+      category: '',
+      content: '',
+      amount: 0,
+    };
+  } catch (error) {
+    console.log('거래내역 수정 실패');
+    console.log(error);
+  }
+};
 </script>
 
 <style scoped>
