@@ -9,6 +9,7 @@
       <router-link to="/monthly-summary" class="menu-item"
         >월별요약</router-link
       >
+      <router-link to="/chatbot" class="menu-item"> 소비패턴 챗봇 </router-link>
     </nav>
   </aside>
 </template>

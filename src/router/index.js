@@ -7,6 +7,7 @@ import CalendarView from '@/views/CalendarView.vue';
 import TransactionListView from '@/views/TransactionListView.vue';
 import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import MonthlySummaryView from '@/views/MonthlySummaryView.vue';
+import ChatbotView from '@/views/ChatbotView.vue';
 // 아래: 기록 추가 및 수정 구역
 import ExpenseInput from '@/components/transaction/trnsac-form-pages/inputs/ExpenseInput.vue';
 import IncomeInput from '@/components/transaction/trnsac-form-pages/inputs/IncomeInput.vue';
@@ -78,6 +79,12 @@ const router = createRouter({
       path: '/calender/:id',
       component: ExpenseSelect,
       name: 'calender/id',
+    },
+    {
+      path: '/chatbot',
+      name: 'chatbot',
+      component: ChatbotView,
+      meta: { requiresAuth: true },
     },
   ],
 });

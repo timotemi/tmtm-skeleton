@@ -46,8 +46,8 @@ onMounted(async () => {
 
 <style scoped>
 .page {
-  height: calc(100vh - 70px);
-  padding: 20px 24px 20px;
+  height: 100%;
+  padding: 20px 24px;
   box-sizing: border-box;
   overflow: hidden;
 

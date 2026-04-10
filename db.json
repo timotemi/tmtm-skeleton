@@ -31,12 +31,42 @@
   ],
   "transactions": [
     {
+      "id": 3,
+      "userId": 2,
+      "date": "2026-04-08",
+      "type": "expense",
+      "category": "카페",
+      "amount": 6500,
+      "content": "아메리카노",
+      "status": "completed"
+    },
+    {
       "id": 4,
       "userId": 3,
       "date": "2026-04-13",
       "type": "expense",
       "category": "보험",
-      "amount": 2345,
+      "amount": 120000,
+      "content": "보험료 납부 예정",
+      "status": "planned"
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "date": "2026-04-08",
+      "type": "expense",
+      "category": "카페",
+      "amount": 6500,
+      "content": "아메리카노",
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "userId": 3,
+      "date": "2026-04-13",
+      "type": "expense",
+      "category": "보험",
+      "amount": 120000,
       "content": "보험료 납부 예정",
       "status": "planned"
     },
@@ -57,6 +87,164 @@
       "amount": 8765,
       "content": "",
       "id": 6
+      "id": 5,
+      "userId": 2,
+      "date": "2026-04-01",
+      "type": "income",
+      "category": "월급",
+      "amount": 1800000,
+      "content": "4월 급여",
+      "status": "completed"
+    },
+    {
+      "id": 6,
+      "userId": 2,
+      "date": "2026-04-02",
+      "type": "expense",
+      "category": "식비",
+      "amount": 12000,
+      "content": "점심 식사",
+      "status": "completed"
+    },
+    {
+      "id": 7,
+      "userId": 2,
+      "date": "2026-04-03",
+      "type": "expense",
+      "category": "교통",
+      "amount": 2800,
+      "content": "버스비",
+      "status": "completed"
+    },
+    {
+      "id": 8,
+      "userId": 2,
+      "date": "2026-04-04",
+      "type": "expense",
+      "category": "쇼핑",
+      "amount": 39000,
+      "content": "티셔츠 구매",
+      "status": "completed"
+    },
+    {
+      "id": 9,
+      "userId": 2,
+      "date": "2026-04-05",
+      "type": "expense",
+      "category": "식비",
+      "amount": 18500,
+      "content": "저녁 배달",
+      "status": "completed"
+    },
+    {
+      "id": 10,
+      "userId": 2,
+      "date": "2026-04-06",
+      "type": "expense",
+      "category": "생활",
+      "amount": 7200,
+      "content": "세제 구매",
+      "status": "completed"
+    },
+    {
+      "id": 11,
+      "userId": 2,
+      "date": "2026-04-07",
+      "type": "expense",
+      "category": "카페",
+      "amount": 5800,
+      "content": "카페 라떼",
+      "status": "completed"
+    },
+    {
+      "id": 12,
+      "userId": 2,
+      "date": "2026-04-09",
+      "type": "expense",
+      "category": "고정지출",
+      "amount": 549998,
+      "content": "월세",
+      "status": "completed"
+    },
+    {
+      "id": 13,
+      "userId": 2,
+      "date": "2026-04-10",
+      "type": "expense",
+      "category": "통신",
+      "amount": 65000,
+      "content": "휴대폰 요금",
+      "status": "completed"
+    },
+    {
+      "id": 14,
+      "userId": 2,
+      "date": "2026-04-11",
+      "type": "expense",
+      "category": "교통",
+      "amount": 1350,
+      "content": "지하철 환승",
+      "status": "completed"
+    },
+    {
+      "id": 15,
+      "userId": 2,
+      "date": "2026-04-12",
+      "type": "expense",
+      "category": "식비",
+      "amount": 9500,
+      "content": "김밥과 음료",
+      "status": "completed"
+    },
+    {
+      "id": 16,
+      "userId": 2,
+      "date": "2026-04-14",
+      "type": "expense",
+      "category": "문화",
+      "amount": 15000,
+      "content": "영화 관람",
+      "status": "completed"
+    },
+    {
+      "id": 17,
+      "userId": 2,
+      "date": "2026-04-15",
+      "type": "expense",
+      "category": "식비",
+      "amount": 22000,
+      "content": "외식",
+      "status": "completed"
+    },
+    {
+      "id": 18,
+      "userId": 2,
+      "date": "2026-04-16",
+      "type": "income",
+      "category": "부수입",
+      "amount": 120000,
+      "content": "중고거래 판매",
+      "status": "completed"
+    },
+    {
+      "id": 19,
+      "userId": 2,
+      "date": "2026-04-17",
+      "type": "expense",
+      "category": "카페",
+      "amount": 6100,
+      "content": "아이스커피",
+      "status": "completed"
+    },
+    {
+      "id": 20,
+      "userId": 2,
+      "date": "2026-04-18",
+      "type": "expense",
+      "category": "쇼핑",
+      "amount": 48000,
+      "content": "운동화 할인 구매",
+      "status": "completed"
     }
   ]
 }
