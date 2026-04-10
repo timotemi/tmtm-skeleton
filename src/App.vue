@@ -4,7 +4,6 @@
       <SideBar />
       <AppHeader />
     </template>
-
     <main :class="showLayout ? 'main-content' : 'auth-content'">
       <RouterView />
     </main>
