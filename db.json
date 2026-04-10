@@ -61,24 +61,7 @@
       "status": "planned"
     },
     {
-      "userId": "jwp010107@naver.com",
-      "date": "2026-03-19",
-      "type": "expense",
-      "category": "",
-      "amount": 2345,
-      "content": "",
-      "id": 5
-    },
-    {
-      "userId": "jwp010107@naver.com",
-      "date": "2026-04-23",
-      "type": "expense",
-      "category": "",
-      "amount": 8765,
-      "content": "",
-      "id": 6
-    },
-    {
+      "id": 5,
       "userId": 2,
       "date": "2026-04-01",
       "type": "income",
@@ -226,6 +209,78 @@
       "amount": 48000,
       "content": "운동화 할인 구매",
       "status": "completed"
+    },
+    {
+      "userId": "kim@example.com",
+      "date": "",
+      "type": "expense",
+      "category": "",
+      "amount": 0,
+      "content": "",
+      "id": 21
+    },
+    {
+      "userId": "kim@example.com",
+      "date": "2026-04-14",
+      "type": "bank",
+      "category": "food",
+      "amount": 4,
+      "content": "ㅁㄴㅇ",
+      "id": 22
+    },
+    {
+      "userId": "kim@example.com",
+      "date": "2026-04-14",
+      "type": "bank",
+      "category": "food",
+      "amount": 4,
+      "content": "ㅁㄴㅇ",
+      "id": 23
+    },
+    {
+      "userId": "kim@example.com",
+      "date": "2026-04-14",
+      "type": "bank",
+      "category": "food",
+      "amount": 4,
+      "content": "ㅁㄴㅇ",
+      "id": 24
+    },
+    {
+      "userId": "kim@example.com",
+      "date": "2026-04-14",
+      "type": "bank",
+      "category": "food",
+      "amount": 4,
+      "content": "ㅁㄴㅇ",
+      "id": 25
+    },
+    {
+      "userId": "kim@example.com",
+      "date": "2026-04-14",
+      "type": "bank",
+      "category": "food",
+      "amount": 4,
+      "content": "ㅁㄴㅇ",
+      "id": 26
+    },
+    {
+      "userId": "kim@example.com",
+      "date": "2026-04-14",
+      "type": "bank",
+      "category": "food",
+      "amount": 4,
+      "content": "ㅁㄴㅇ",
+      "id": 27
+    },
+    {
+      "userId": "kim@example.com",
+      "date": "2026-04-14",
+      "type": "bank",
+      "category": "food",
+      "amount": 4,
+      "content": "ㅁㄴㅇ",
+      "id": 28
     }
   ]
 }
