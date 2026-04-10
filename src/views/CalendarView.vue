@@ -520,4 +520,288 @@ const saveEdit = async (id) => {
 .page {
   padding: 24px;
 }
+
+/* 전체 달력 컨테이너 */
+div > div[style*='width: 680px'] {
+  width: 900px !important;
+  margin: 13px auto !important;
+}
+
+/* 바깥 카드 */
+div > div[style*='width: 680px'] > div {
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 24px !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14) !important;
+}
+
+/* 상단 월 이동 영역 */
+div[style*='text-align: center'][style*='align-content: center'] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 20px 16px 16px !important;
+  flex-wrap: wrap !important;
+}
+
+/* 상단 버튼 */
+div[style*='text-align: center'][style*='align-content: center'] > button {
+  width: 38px !important;
+  height: 38px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #1f2937 !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+div[style*='text-align: center'][style*='align-content: center']
+  > button:hover {
+  transform: translateY(-1px) !important;
+  background: rgba(255, 255, 255, 0.24) !important;
+}
+
+/* 현재 날짜 타이틀 */
+span[style*='cursor: pointer'] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 250px !important;
+  height: 42px !important;
+  padding: 0 16px !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #111827 !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+}
+
+/* 요일 헤더 */
+div[style*='border: solid 2px black'][style*='grid-template-columns: repeat(7, 1fr)'] {
+  border: 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+div[style*='border: solid 2px black'][style*='grid-template-columns: repeat(7, 1fr)']
+  > div {
+  padding: 12px 6px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #374151 !important;
+}
+
+/* 날짜 그리드 */
+div[style*='display: grid'][style*='grid-template-columns: repeat(7, 1fr)'][style*='border: solid 1px black'] {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* 날짜 셀 - 살짝 작게 */
+div[style*='height: 100px'][style*='textAlign: center'] {
+  height: 92px !important;
+  min-height: 92px !important;
+  padding: 6px 4px !important;
+  border: 1px solid rgba(148, 163, 184, 0.16) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  transition: all 0.18s ease !important;
+}
+
+div[style*='height: 100px'][style*='textAlign: center']:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 날짜 숫자 */
+div[style*='height: 100px'][style*='textAlign: center']
+  > div[style*='font-size: 16px'] {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  margin-bottom: 4px !important;
+}
+
+/* 셀 내부 금액 */
+div[style*='margin-top: 6px'][style*='font-size: 12px'][style*='flex-direction: column'] {
+  margin-top: 4px !important;
+  gap: 2px !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+}
+
+div[style*='margin-top: 6px'][style*='font-size: 12px'][style*='flex-direction: column']
+  > div {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+
+/* 플로팅 + 버튼 */
+button[style*='font-size: 50px'][style*='position: fixed'] {
+  width: 60px !important;
+  height: 60px !important;
+  right: 28px !important;
+  bottom: 28px !important;
+  top: auto !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background: linear-gradient(135deg, #60a5fa, #3b82f6) !important;
+  color: white !important;
+  font-size: 34px !important;
+  line-height: 1 !important;
+  box-shadow: 0 12px 28px rgba(59, 130, 246, 0.35) !important;
+  cursor: pointer !important;
+  z-index: 1100 !important;
+}
+
+/* 모달 오버레이 */
+div[style*='position: fixed'][style*='backdrop-filter: blur(2px)'][style*='z-index: 9999'] {
+  background: rgba(15, 23, 42, 0.22) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  padding: 20px !important;
+}
+
+/* 모달 카드 */
+div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white'] {
+  width: min(560px, calc(100vw - 32px)) !important;
+  min-height: 300px !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  color: #111827 !important;
+  border-radius: 24px !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+/* 모달 헤더 */
+div[style*='justify-content: space-between'][style*='margin-bottom: 20px'] {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-bottom: 18px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35) !important;
+}
+
+div[style*='justify-content: space-between'][style*='margin-bottom: 20px'] h3 {
+  margin: 0 !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+}
+
+/* 모달 내부 버튼 공통 */
+div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
+  button {
+  height: 46px !important;
+  padding: 0 18px !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  background: rgba(255, 255, 255, 0.56) !important;
+  color: #1f2937 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
+  button:hover {
+  transform: translateY(-1px) !important;
+  background: rgba(255, 255, 255, 0.76) !important;
+}
+
+/* 수정 input 줄 */
+div[style*='display: flex'][style*='gap: 6px'][style*='align-items: center'] {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 12px !important;
+}
+
+/* 수정 input */
+div[style*='display: flex'][style*='gap: 6px'][style*='align-items: center']
+  input {
+  height: 48px !important;
+  padding: 0 16px !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  color: #1f2937 !important;
+  font-size: 16px !important;
+  outline: none !important;
+}
+
+/* 거래 항목 줄간격 */
+div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
+  > div:not([style*='justify-content: space-between']) {
+  margin-bottom: 16px !important;
+  padding-bottom: 12px !important;
+}
+
+/* 수정/삭제, 저장/취소 버튼 띄우기 */
+div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
+  > div
+  > div:last-child {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+  margin: 8px 0 14px !important;
+}
+
+div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
+  > div
+  > div:last-child
+  button {
+  min-width: 72px !important;
+}
+
+/* 하단 합계 */
+div[style*='margin-top: 20px'] {
+  margin-top: 20px !important;
+  padding-top: 14px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.35) !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+}
+
+@media (max-width: 768px) {
+  div > div[style*='width: 680px'] {
+    width: calc(100vw - 24px) !important;
+    margin: 12px auto 20px !important;
+  }
+
+  span[style*='cursor: pointer'] {
+    min-width: 100% !important;
+    order: -1 !important;
+  }
+
+  div[style*='height: 100px'][style*='textAlign: center'] {
+    height: 82px !important;
+    min-height: 82px !important;
+  }
+
+  button[style*='font-size: 50px'][style*='position: fixed'] {
+    right: 16px !important;
+    bottom: 16px !important;
+    width: 54px !important;
+    height: 54px !important;
+    font-size: 30px !important;
+  }
+}
 </style>
