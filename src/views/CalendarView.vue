@@ -164,10 +164,12 @@
 
         <div v-for="item in selectedTransactions" :key="item.id">
           <div v-if="editingId !== item.id">
-            <span>
-              {{ item.category }}, {{ item.content }},
-              {{ formatNumber(item.amount) }}원
-            </span>
+            <RouterLink :to="{ name: 'calender/id', params: { id: item.id } }">
+              <span>
+                {{ item.category }}, {{ item.content }},
+                {{ formatNumber(item.amount) }}원
+              </span>
+            </RouterLink>
           </div>
 
           <div v-else style="display: flex; gap: 6px; align-items: center">

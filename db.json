@@ -71,6 +71,22 @@
       "status": "planned"
     },
     {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-03-19",
+      "type": "expense",
+      "category": "",
+      "amount": 2345,
+      "content": "",
+      "id": 5
+    },
+    {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-23",
+      "type": "expense",
+      "category": "",
+      "amount": 8765,
+      "content": "",
+      "id": 6
       "id": 5,
       "userId": 2,
       "date": "2026-04-01",
