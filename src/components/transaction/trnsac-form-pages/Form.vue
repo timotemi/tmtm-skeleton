@@ -21,14 +21,6 @@
             </select>
           </li>
           <li>
-            <label for="asset">자산: </label>
-            <select name="assets" v-model="formData.type" id="asset">
-              <option value="cash">현금</option>
-              <option value="bank">은행</option>
-              <option value="card">카드</option>
-            </select>
-          </li>
-          <li>
             내용:
             <input type="text" v-model="formData.content" />
           </li>
@@ -40,9 +32,9 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useTransactionStore } from '@/stores/transaction';
+import { useMoneyStore } from '@/stores/transaction';
 
-const transactionStore = useTransactionStore();
+const transactionStore = useMoneyStore();
 
 const formData = computed(() => {
   return transactionStore.isEditMode

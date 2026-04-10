@@ -19,9 +19,9 @@
 </template>
 
 <script setup>
-import { useTransactionStore } from '@/stores/transaction';
+import { useMoneyStore } from '@/stores/transaction';
 
-const transactionStore = useTransactionStore();
+const transactionStore = useMoneyStore();
 </script>
 
 <style>

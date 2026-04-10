@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
 
 // Store 정의 - 'counter'는 스토어의 이름(고유식별자)
-export const useTransactionStore = defineStore('transaction', () => {
+export const useMoneyStore = defineStore('transaction', () => {
   const authStore = useAuthStore();
   const BASEURL = '/api/transactions';
   const currentRoute = useRoute();
