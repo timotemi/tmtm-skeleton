@@ -1,10 +1,14 @@
 <template>
   <div class="app-shell">
-    <template v-if="showLayout">
-      <AppHeader />
-      <Sidebar />
-    </template>
-    <main :class="showLayout ? 'main-content' : 'auth-content'">
+    <AppHeader v-if="showLayout" />
+    <Sidebar v-if="showLayout" />
+
+    <main
+      :class="[
+        showLayout ? 'main-content' : 'auth-content',
+        isChatbotPage ? 'chatbot-scroll' : '',
+      ]"
+    >
       <RouterView />
     </main>
   </div>
@@ -21,11 +25,16 @@ const route = useRoute();
 const showLayout = computed(() => {
   return !['login', 'signup'].includes(route.name);
 });
+
+const isChatbotPage = computed(() => {
+  return route.name === 'chatbot';
+});
 </script>
 
 <style>
 .app-shell {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background:
     linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.18)),
     url('@/assets/images/background.jpg') center / cover no-repeat fixed;
@@ -35,11 +44,15 @@ const showLayout = computed(() => {
   margin-left: 220px;
   margin-top: 70px;
   width: calc(100% - 220px);
-  min-height: calc(100vh - 70px);
-  overflow-y: auto;
-  overflow-x: hidden;
+  height: calc(100vh - 70px);
+  overflow: hidden;
   background: transparent;
   box-sizing: border-box;
+}
+
+.main-content.chatbot-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .auth-content {

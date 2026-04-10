@@ -31,12 +31,22 @@
   ],
   "transactions": [
     {
+      "id": 3,
+      "userId": 2,
+      "date": "2026-04-08",
+      "type": "expense",
+      "category": "카페",
+      "amount": 6500,
+      "content": "아메리카노",
+      "status": "completed"
+    },
+    {
       "id": 4,
       "userId": 3,
       "date": "2026-04-13",
       "type": "expense",
       "category": "보험",
-      "amount": 2345,
+      "amount": 120000,
       "content": "보험료 납부 예정",
       "status": "planned"
     },
@@ -136,7 +146,7 @@
       "date": "2026-04-09",
       "type": "expense",
       "category": "고정지출",
-      "amount": 550000,
+      "amount": 549998,
       "content": "월세",
       "status": "completed"
     },
