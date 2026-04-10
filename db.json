@@ -49,6 +49,26 @@
       "amount": 120000,
       "content": "보험료 납부 예정",
       "status": "planned"
+    },
+    {
+      "id": 5,
+      "userId": 3,
+      "date": "2026-04-13",
+      "type": "income",
+      "category": "상여금",
+      "amount": 500000,
+      "content": "",
+      "status": "planned"
+    },
+    {
+      "id": 6,
+      "userId": 3,
+      "date": "2026-04-13",
+      "type": "income",
+      "category": "급여",
+      "amount": 2500000,
+      "content": "",
+      "status": "planned"
     }
   ]
 }
