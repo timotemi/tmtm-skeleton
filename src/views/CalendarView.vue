@@ -103,18 +103,20 @@
     </div>
 
     <!-- 7-1. "+"" 버튼 fixed로 고정 시키기 -->
-    <button
-      style="
-        font-size: 50px;
-        position: fixed;
-        right: 200px;
-        top: 200px;
-        border-radius: 10px;
-      "
-      @click=""
-    >
-      +
-    </button>
+
+    <RouterLink :to="{ name: 'transactions' }">
+      <button
+        style="
+          font-size: 50px;
+          position: fixed;
+          right: 200px;
+          top: 200px;
+          border-radius: 10px;
+        "
+      >
+        +
+      </button>
+    </RouterLink>
     <!-- 6-3. 상세 모달 창, 텍스트 중앙 정렬  영역외에 어둡게, 블러 처리
      
     -->
@@ -158,7 +160,9 @@
             {{ selectedDate.getMonth() + 1 }}월 {{ selectedDate.getDate() }}일
             상세내역
           </h3>
-          <button @click="">+</button>
+          <RouterLink :to="{ name: 'transactions' }">
+            <button>+</button>
+          </RouterLink>
           <button @click="isDetailModalOpen = false">닫기</button>
         </div>
 
