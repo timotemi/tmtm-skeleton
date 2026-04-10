@@ -1,8 +1,8 @@
 <template>
   <div class="app-shell">
     <template v-if="showLayout">
-      <SideBar />
       <AppHeader />
+      <Sidebar />
     </template>
     <main :class="showLayout ? 'main-content' : 'auth-content'">
       <RouterView />
