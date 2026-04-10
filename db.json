@@ -281,6 +281,15 @@
       "amount": 4,
       "content": "ㅁㄴㅇ",
       "id": 28
+    },
+    {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
+      "type": "expense",
+      "category": "",
+      "amount": 0,
+      "content": "",
+      "id": 29
     }
   ]
 }

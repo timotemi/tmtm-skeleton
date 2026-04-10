@@ -51,29 +51,42 @@ const router = createRouter({
       name: 'transactions',
       component: TransactionForm,
       meta: { requiresAuth: true },
+      // 자식 라우트 시작
+      children: [
+        {
+          path: 'expense', // 최종 주소: /transactions/expense
+          name: 'expense-input',
+          components: {
+            default: ExpenseInput,
+            header: ExpenseHeader,
+          },
+        },
+        {
+          path: 'income', // 최종 주소: /transactions/income
+          name: 'income-input',
+          components: {
+            default: IncomeInput,
+            header: IncomeHeader,
+          },
+        },
+        {
+          path: 'transfer', // 최종 주소: /transactions/transfer
+          name: 'transfer-input',
+          components: {
+            default: TransferInput,
+            header: TransferHeader,
+          },
+        },
+      ],
     },
+
     {
       path: '/monthly-summary',
       name: 'monthly-summary',
       component: MonthlySummaryView,
       meta: { requiresAuth: true },
     },
-    // 아래: 기록 추가 구역
-    {
-      path: '/expense-input', //지출
-      components: { default: ExpenseInput, header: ExpenseHeader },
-      name: 'expense-input',
-    },
-    {
-      path: '/income-input', //수입
-      components: { default: IncomeInput, header: IncomeHeader },
-      name: 'income-input',
-    },
-    {
-      path: '/transfer-input', //이체
-      components: { default: TransferInput, header: TransferHeader },
-      name: 'transfer-input',
-    },
+
     // 아래: 기록 받아오는 구역
     {
       path: '/calender/:id',
