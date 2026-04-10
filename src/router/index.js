@@ -6,6 +6,7 @@ import MyPageView from '@/views/MyPageView.vue';
 import CalendarView from '@/views/CalendarView.vue';
 import TransactionListView from '@/views/TransactionListView.vue';
 import MonthlySummaryView from '@/views/MonthlySummaryView.vue';
+import ChatbotView from '@/views/ChatbotView.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -39,6 +40,12 @@ const router = createRouter({
       path: '/monthly-summary',
       name: 'monthly-summary',
       component: MonthlySummaryView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/chatbot',
+      name: 'chatbot',
+      component: ChatbotView,
       meta: { requiresAuth: true },
     },
   ],
