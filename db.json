@@ -41,16 +41,6 @@
       "status": "completed"
     },
     {
-      "id": 4,
-      "userId": 3,
-      "date": "2026-04-13",
-      "type": "expense",
-      "category": "보험",
-      "amount": 120000,
-      "content": "보험료 납부 예정",
-      "status": "planned"
-    },
-    {
       "id": 3,
       "userId": 2,
       "date": "2026-04-08",
@@ -225,16 +215,6 @@
       "category": "부수입",
       "amount": 120000,
       "content": "중고거래 판매",
-      "status": "completed"
-    },
-    {
-      "id": 19,
-      "userId": 2,
-      "date": "2026-04-17",
-      "type": "expense",
-      "category": "카페",
-      "amount": 6100,
-      "content": "아이스커피",
       "status": "completed"
     },
     {
