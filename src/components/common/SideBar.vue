@@ -3,8 +3,8 @@
     <nav class="menu-list">
       <router-link to="/" class="menu-item">홈</router-link>
       <router-link to="/calendar" class="menu-item">캘린더</router-link>
-      <router-link to="/transactions" class="menu-item"
-        >전체 거래목록</router-link
+      <router-link to="/transactions-list" class="menu-item"
+        >전체거래목록</router-link
       >
       <router-link to="/monthly-summary" class="menu-item"
         >월별요약</router-link

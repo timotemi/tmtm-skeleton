@@ -6,13 +6,13 @@
         class="nav-link"
         :to="{ name: 'expense-input' }"
         @click="transactionStore.addExpense"
-        >수입</router-link
+        >지출</router-link
       >
       <router-link
         class="nav-link"
         :to="{ name: 'income-input' }"
         @click="transactionStore.addIncome"
-        >지출</router-link
+        >수입</router-link
       >
       <router-link class="nav-link" :to="{ name: 'transfer-input' }"
         >이체</router-link
