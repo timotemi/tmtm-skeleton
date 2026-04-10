@@ -3,7 +3,7 @@
     <nav class="menu-list">
       <router-link to="/" class="menu-item">홈</router-link>
       <router-link to="/calendar" class="menu-item">캘린더</router-link>
-      <router-link to="/transactions" class="menu-item"
+      <router-link to="/transactions-list" class="menu-item"
         >전체거래목록</router-link
       >
       <router-link to="/monthly-summary" class="menu-item"

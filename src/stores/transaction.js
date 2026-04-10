@@ -68,7 +68,7 @@ export const useTransactionStore = defineStore('transaction', () => {
       BASEURL + `/${currentId.value}`,
       editingTransaction.value,
     );
-    // console.log(response);
+    console.log(response);
   };
 
   // 사용할 상태와 메소드 반환

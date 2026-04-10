@@ -5,6 +5,7 @@ import SignupView from '@/views/SignupView.vue';
 import MyPageView from '@/views/MyPageView.vue';
 import CalendarView from '@/views/CalendarView.vue';
 import TransactionListView from '@/views/TransactionListView.vue';
+import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import MonthlySummaryView from '@/views/MonthlySummaryView.vue';
 // 아래: 기록 추가 및 수정 구역
 import ExpenseInput from '@/components/transaction/trnsac-form-pages/inputs/ExpenseInput.vue';
@@ -39,9 +40,15 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
+      path: '/transactions-list',
+      name: 'transactions-list',
+      component: TransactionListView,
+      meta: { requiresAuth: true },
+    },
+    {
       path: '/transactions',
       name: 'transactions',
-      component: TransactionListView,
+      component: TransactionForm,
       meta: { requiresAuth: true },
     },
     {
