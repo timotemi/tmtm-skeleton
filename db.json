@@ -121,16 +121,6 @@
       "status": "completed"
     },
     {
-      "id": 11,
-      "userId": 2,
-      "date": "2026-04-07",
-      "type": "expense",
-      "category": "카페",
-      "amount": 5800,
-      "content": "카페 라떼",
-      "status": "completed"
-    },
-    {
       "id": 12,
       "userId": 2,
       "date": "2026-04-09",
@@ -211,8 +201,8 @@
       "status": "completed"
     },
     {
-      "userId": "kim@example.com",
-      "date": "",
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
       "type": "expense",
       "category": "",
       "amount": 0,
@@ -220,74 +210,74 @@
       "id": 21
     },
     {
-      "userId": "kim@example.com",
-      "date": "2026-04-14",
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
       "type": "bank",
-      "category": "food",
-      "amount": 4,
-      "content": "ㅁㄴㅇ",
+      "category": "transport",
+      "amount": 6854312,
+      "content": "lkjhgfdfghjkl;/",
       "id": 22
-    },
-    {
-      "userId": "kim@example.com",
-      "date": "2026-04-14",
-      "type": "bank",
-      "category": "food",
-      "amount": 4,
-      "content": "ㅁㄴㅇ",
-      "id": 23
-    },
-    {
-      "userId": "kim@example.com",
-      "date": "2026-04-14",
-      "type": "bank",
-      "category": "food",
-      "amount": 4,
-      "content": "ㅁㄴㅇ",
-      "id": 24
-    },
-    {
-      "userId": "kim@example.com",
-      "date": "2026-04-14",
-      "type": "bank",
-      "category": "food",
-      "amount": 4,
-      "content": "ㅁㄴㅇ",
-      "id": 25
-    },
-    {
-      "userId": "kim@example.com",
-      "date": "2026-04-14",
-      "type": "bank",
-      "category": "food",
-      "amount": 4,
-      "content": "ㅁㄴㅇ",
-      "id": 26
-    },
-    {
-      "userId": "kim@example.com",
-      "date": "2026-04-14",
-      "type": "bank",
-      "category": "food",
-      "amount": 4,
-      "content": "ㅁㄴㅇ",
-      "id": 27
-    },
-    {
-      "userId": "kim@example.com",
-      "date": "2026-04-14",
-      "type": "bank",
-      "category": "food",
-      "amount": 4,
-      "content": "ㅁㄴㅇ",
-      "id": 28
     },
     {
       "userId": "jwp010107@naver.com",
       "date": "2026-04-10",
       "type": "expense",
       "category": "",
-      "amount": 0,
+      "amount": 6845132,
+      "content": "",
+      "id": 23
+    },
+    {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
+      "type": "income",
+      "category": "transport",
+      "amount": 3456787,
+      "content": "567645",
+      "id": 24
+    },
+    {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
+      "type": "",
+      "category": "transport",
+      "amount": 324564,
+      "content": "345",
+      "id": 25
+    },
+    {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
+      "type": "",
+      "category": "",
+      "amount": 43555,
+      "content": "",
+      "id": 26
+    },
+    {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
+      "type": "",
+      "category": "",
+      "amount": 2345,
+      "content": "waef",
+      "id": 27
+    },
+    {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
+      "type": "",
+      "category": "",
+      "amount": 3546789,
+      "content": "",
+      "id": 28
+    },
+    {
+      "userId": "jwp010107@naver.com",
+      "date": "2026-04-10",
+      "type": "income",
+      "category": "",
+      "amount": 45678,
       "content": "",
       "id": 29
     }

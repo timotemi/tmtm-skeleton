@@ -10,8 +10,8 @@
 import InputButton from '@/components/transaction/trnsac-form-pages/buttons/InputButton.vue';
 import Form from '@/components/transaction/trnsac-form-pages/Form.vue';
 import { onMounted } from 'vue'; // onMounted 임포트 필수!
-import { useTransactionStore } from '@/stores/transaction';
-const transactionStore = useTransactionStore();
+import { useMoneyStore } from '@/stores/transaction';
+const transactionStore = useMoneyStore();
 
 onMounted(() => {
   transactionStore.isEditMode = false; // "지금은 입력 모드야!"
