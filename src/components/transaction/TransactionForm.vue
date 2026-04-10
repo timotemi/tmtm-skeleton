@@ -3,20 +3,16 @@
     <router-view name="header"></router-view>
     <div>
       <router-link
-        class="nav-link"
         :to="{ name: 'expense-input' }"
         @click="transactionStore.addExpense"
         >지출</router-link
       >
       <router-link
-        class="nav-link"
         :to="{ name: 'income-input' }"
         @click="transactionStore.addIncome"
         >수입</router-link
       >
-      <router-link class="nav-link" :to="{ name: 'transfer-input' }"
-        >이체</router-link
-      >
+      <router-link :to="{ name: 'transfer-input' }">이체</router-link>
     </div>
     <RouterView></RouterView>
   </div>

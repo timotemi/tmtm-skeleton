@@ -10,7 +10,6 @@ export const useTransactionStore = defineStore('transaction', () => {
   const BASEURL = '/api/transactions';
   const currentRoute = useRoute();
   const router = useRouter();
-  const transactionStore = useTransactionStore();
 
   const userid = authStore.user.email;
 
@@ -21,7 +20,7 @@ export const useTransactionStore = defineStore('transaction', () => {
   const transaction = reactive({
     // id: Date.now(),
     userId: userid,
-    date: '',
+    date: new Date().toISOString().split('T')[0],
     type: '',
     category: '',
     amount: 0,
@@ -33,12 +32,29 @@ export const useTransactionStore = defineStore('transaction', () => {
   const currentId = ref(null);
 
   // 2. 입력 함수
-  const addTransaction = async () => {
-    console.log(transaction);
+  const addTransaction = async (isContinue = false) => {
+    try {
+      // 1. 서버에 데이터 전송
+      await axios.post(BASEURL, transaction);
 
-    let response = await axios.post(BASEURL, transaction);
+      // 2. 입력 칸 비우기 (어떤 버튼을 누르든 공통으로 비웁니다)
+      transaction.amount = 0;
+      transaction.category = '';
+      transaction.content = '';
+      transaction.date = new Date().toISOString().split('T')[0];
+      // type은 유지하는 것이 연속 입력 시 편리할 수 있습니다 (지출 계속 입력 등)
 
-    console.log(response);
+      if (isContinue) {
+        // ✅ '계속' 버튼을 누른 경우: 페이지 이동 없이 알림만 띄움
+        alert('저장되었습니다. 계속 입력하세요.');
+      } else {
+        // ✅ '저장' 버튼을 누른 경우: 목록으로 이동
+        alert('저장완료');
+        router.push({ name: 'transactions-list' });
+      }
+    } catch (error) {
+      console.error('저장실패:', error);
+    }
   };
 
   // 2-1. 지출
@@ -78,7 +94,6 @@ export const useTransactionStore = defineStore('transaction', () => {
     addTransaction,
     getTransaction,
     editTransaction,
-    transactionStore,
     editingTransaction,
     currentRoute,
     router,

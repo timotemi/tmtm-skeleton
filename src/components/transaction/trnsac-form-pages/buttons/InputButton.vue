@@ -1,7 +1,14 @@
 <template>
   <div>
-    <button @click="transactionStore.addTransaction">저장</button>
-    <button>계속</button>
+    <button
+      @click="transactionStore.addTransaction(false)"
+      class="continue-btn"
+    >
+      저장
+    </button>
+    <button @click="transactionStore.addTransaction(true)" class="save-btn">
+      계속
+    </button>
   </div>
 </template>
 

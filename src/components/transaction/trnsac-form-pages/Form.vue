@@ -13,7 +13,7 @@
             원
           </li>
           <li>
-            <label for="category">출금: </label>
+            <label for="category">카테고리: </label>
             <select name="categories" id="category" v-model="formData.category">
               <option value="food">식비</option>
               <option value="transport">교통/차량</option>
@@ -21,7 +21,7 @@
             </select>
           </li>
           <li>
-            <label for="asset">이체: </label>
+            <label for="asset">자산: </label>
             <select name="assets" v-model="formData.type" id="asset">
               <option value="cash">현금</option>
               <option value="bank">은행</option>
