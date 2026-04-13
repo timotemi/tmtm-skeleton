@@ -5,7 +5,7 @@
         src="@/assets/images/logo.png"
         alt="티모태미 로고"
         class="logo-image"
-      />
+      />티모태미
     </router-link>
 
     <div class="header-actions">
