@@ -189,7 +189,7 @@
       "date": "2026-04-06",
       "type": "expense",
       "category": "생활",
-      "amount": 7200,
+      "amount": 7205,
       "content": "세제 구매"
     },
     {
@@ -353,6 +353,42 @@
       "category": "보험",
       "amount": 120000,
       "content": "보험료 납부 예정"
+    },
+    {
+      "userId": 2,
+      "date": "2026-04-02",
+      "type": "income",
+      "category": "용돈",
+      "amount": 200000,
+      "content": "엄마 용돈",
+      "id": 37
+    },
+    {
+      "userId": 2,
+      "date": "2026-04-16",
+      "type": "expense",
+      "category": "의료",
+      "amount": 20000,
+      "content": "감기약 비용",
+      "id": 38
+    },
+    {
+      "userId": 2,
+      "date": "2026-04-13",
+      "type": "expense",
+      "category": "문화",
+      "amount": 70000,
+      "content": "데이트비용",
+      "id": 39
+    },
+    {
+      "userId": 2,
+      "date": "2026-04-13",
+      "type": "income",
+      "category": "부업",
+      "amount": 50000,
+      "content": "당근마켓 알바",
+      "id": 40
     }
   ]
 }
