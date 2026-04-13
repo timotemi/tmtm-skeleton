@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <div style="width: 680px; margin: 0 auto">
       <div style="border: solid 1px black">
         <div>
@@ -149,50 +149,85 @@
           <button @click="isDetailModalOpen = false">닫기</button>
         </div>
 
-        <div v-for="item in selectedTransactions" :key="item.id">
-          <div v-if="editingId !== item.id">
-            <RouterLink :to="{ name: 'calender/id', params: { id: item.id } }">
-              <span>
-                {{ item.category }}, {{ item.content }},
-                {{ formatNumber(item.amount) }}원
-              </span>
-            </RouterLink>
-          </div>
+        <div
+          v-if="selectedTransactions.length === 0"
+          class="alert alert-light text-center border-0 mb-3"
+        >
+          선택한 날짜의 거래 내역이 없습니다.
+        </div>
 
-          <div v-else style="display: flex; gap: 6px; align-items: center">
-            <input
-              v-model="editForm.category"
-              type="text"
-              style="width: 80px"
-            />
-            <input
-              v-model="editForm.content"
-              type="text"
-              style="width: 120px"
-            />
-            <input
-              v-model.number="editForm.amount"
-              type="number"
-              style="width: 100px"
-            />
-          </div>
+        <div
+          v-for="item in selectedTransactions"
+          :key="item.id"
+          class="transaction-entry card border-0 mb-2"
+          :class="item.type === 'income' ? 'income-entry' : 'expense-entry'"
+        >
+          <div class="card-body transaction-entry-body">
+            <template v-if="editingId !== item.id">
+              <div class="transaction-entry-view">
+                <div class="transaction-entry-left">
+                  <span
+                    class="badge rounded-pill transaction-badge"
+                    :class="
+                      item.type === 'income'
+                        ? 'text-bg-primary'
+                        : 'text-bg-danger'
+                    "
+                  >
+                    {{ item.type === 'income' ? '수입' : '지출' }}
+                  </span>
+                  <strong class="transaction-category">{{
+                    item.category
+                  }}</strong>
+                  <span class="transaction-content">{{
+                    item.content || '내용 없음'
+                  }}</span>
+                </div>
 
-          <div v-if="editingId !== item.id">
-            <button @click="startEdit(item)">수정</button>
-            <button @click="deleteTransaction(item.id)">삭제</button>
-          </div>
+                <div class="transaction-entry-right">
+                  <div class="transaction-amount">
+                    {{ formatNumber(item.amount) }}원
+                  </div>
 
-          <div v-else>
-            <button @click="saveEdit(item.id)">저장</button>
-            <button @click="cancelEdit">취소</button>
+                  <div class="transaction-actions d-flex gap-2">
+                    <button @click="startEdit(item)">수정</button>
+                    <button @click="deleteTransaction(item.id)">삭제</button>
+                  </div>
+                </div>
+              </div>
+            </template>
+
+            <template v-else>
+              <div class="transaction-edit-row">
+                <input
+                  v-model="editForm.category"
+                  type="text"
+                  style="width: 80px"
+                />
+                <input
+                  v-model="editForm.content"
+                  type="text"
+                  style="width: 120px"
+                />
+                <input
+                  v-model.number="editForm.amount"
+                  type="number"
+                  style="width: 100px"
+                />
+                <div class="transaction-actions d-flex gap-2">
+                  <button @click="saveEdit(item.id)">저장</button>
+                  <button @click="cancelEdit">취소</button>
+                </div>
+              </div>
+            </template>
           </div>
         </div>
 
         <div style="margin-top: 20px">
-          <div v-if="selectedIncomeTotal > 0">
+          <div v-if="selectedIncomeTotal > 0" class="text-primary">
             수입 {{ formatNumber(selectedIncomeTotal) }}원
           </div>
-          <div v-if="selectedExpenseTotal > 0">
+          <div v-if="selectedExpenseTotal > 0" class="text-danger">
             지출 {{ formatNumber(selectedExpenseTotal) }}원
           </div>
           <div v-if="selectedTransactions.length > 0">
@@ -243,19 +278,9 @@ const lastDate = computed(() =>
 
 const calendarTable = computed(() => {
   const days = [];
-
-  for (let i = 0; i < firstDay.value; i++) {
-    days.push('');
-  }
-
-  for (let i = 1; i <= lastDate.value; i++) {
-    days.push(i);
-  }
-
-  while (days.length < 42) {
-    days.push('');
-  }
-
+  for (let i = 0; i < firstDay.value; i++) days.push('');
+  for (let i = 1; i <= lastDate.value; i++) days.push(i);
+  while (days.length < 42) days.push('');
   return days;
 });
 
@@ -366,13 +391,11 @@ const selectDate = (item) => {
 
 const getDateStringByItem = (item) => {
   if (!item) return '';
-  const dateObj = new Date(year.value, month.value, item);
-  return formatDate(dateObj);
+  return formatDate(new Date(year.value, month.value, item));
 };
 
 const getIncomeAmountByDate = (item) => {
   if (!item) return 0;
-
   const targetDate = getDateStringByItem(item);
 
   return transactions.value
@@ -382,7 +405,6 @@ const getIncomeAmountByDate = (item) => {
 
 const getExpenseAmountByDate = (item) => {
   if (!item) return 0;
-
   const targetDate = getDateStringByItem(item);
 
   return transactions.value
@@ -394,9 +416,7 @@ const getTotalAmountByDate = (item) => {
   return getIncomeAmountByDate(item) - getExpenseAmountByDate(item);
 };
 
-const formatNumber = (num) => {
-  return Number(num).toLocaleString();
-};
+const formatNumber = (num) => Number(num).toLocaleString();
 
 const selectedIncomeTotal = computed(() =>
   selectedTransactions.value
@@ -483,15 +503,36 @@ watch(
 <style scoped>
 .page {
   padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
 }
 
-/* 전체 달력 컨테이너 */
+.page::-webkit-scrollbar {
+  width: 10px;
+}
+
+.page::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.18);
+  border-radius: 999px;
+}
+
+.page::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.45);
+  border-radius: 999px;
+}
+
+.page::-webkit-scrollbar-thumb:hover {
+  background: rgba(71, 85, 105, 0.62);
+}
+
 div > div[style*='width: 680px'] {
   width: 900px !important;
   margin: 13px auto !important;
 }
 
-/* 바깥 카드 */
 div > div[style*='width: 680px'] > div {
   border: 1px solid rgba(255, 255, 255, 0.18) !important;
   border-radius: 24px !important;
@@ -502,7 +543,6 @@ div > div[style*='width: 680px'] > div {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14) !important;
 }
 
-/* 상단 이동 영역 */
 div[style*='text-align: center'][style*='align-content: center'] {
   display: flex !important;
   justify-content: center !important;
@@ -512,7 +552,6 @@ div[style*='text-align: center'][style*='align-content: center'] {
   flex-wrap: wrap !important;
 }
 
-/* 상단 버튼 */
 div[style*='text-align: center'][style*='align-content: center'] > button {
   width: 38px !important;
   height: 38px !important;
@@ -531,7 +570,6 @@ div[style*='text-align: center'][style*='align-content: center']
   background: rgba(255, 255, 255, 0.24) !important;
 }
 
-/* 현재 날짜 타이틀 */
 span[style*='cursor: pointer'] {
   display: inline-flex !important;
   align-items: center !important;
@@ -547,7 +585,6 @@ span[style*='cursor: pointer'] {
   font-weight: 800 !important;
 }
 
-/* 요일 헤더 */
 div[style*='border: solid 2px black'][style*='grid-template-columns: repeat(7, 1fr)'] {
   border: 0 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
@@ -563,13 +600,11 @@ div[style*='border: solid 2px black'][style*='grid-template-columns: repeat(7, 1
   color: #374151 !important;
 }
 
-/* 날짜 그리드 */
 div[style*='display: grid'][style*='grid-template-columns: repeat(7, 1fr)'][style*='border: solid 1px black'] {
   border: 0 !important;
   background: transparent !important;
 }
 
-/* 날짜 칸 */
 div[style*='height: 100px'][style*='textAlign: center'] {
   height: 92px !important;
   min-height: 92px !important;
@@ -586,7 +621,6 @@ div[style*='height: 100px'][style*='textAlign: center']:hover {
   transform: translateY(-1px) !important;
 }
 
-/* 날짜 숫자 */
 div[style*='height: 100px'][style*='textAlign: center']
   > div[style*='font-size: 16px'] {
   font-size: 15px !important;
@@ -594,7 +628,6 @@ div[style*='height: 100px'][style*='textAlign: center']
   margin-bottom: 4px !important;
 }
 
-/* 일별 금액 */
 div[style*='margin-top: 6px'][style*='font-size: 12px'][style*='flex-direction: column'] {
   margin-top: 4px !important;
   gap: 2px !important;
@@ -609,7 +642,6 @@ div[style*='margin-top: 6px'][style*='font-size: 12px'][style*='flex-direction: 
   white-space: nowrap !important;
 }
 
-/* 플로팅 + 버튼 */
 button[style*='font-size: 50px'][style*='position: fixed'] {
   width: 60px !important;
   height: 60px !important;
@@ -627,7 +659,6 @@ button[style*='font-size: 50px'][style*='position: fixed'] {
   z-index: 1100 !important;
 }
 
-/* 모달 오버레이 */
 div[style*='position: fixed'][style*='backdrop-filter: blur(2px)'][style*='z-index: 9999'] {
   background: rgba(15, 23, 42, 0.22) !important;
   backdrop-filter: blur(8px) !important;
@@ -635,9 +666,8 @@ div[style*='position: fixed'][style*='backdrop-filter: blur(2px)'][style*='z-ind
   padding: 20px !important;
 }
 
-/* 모달 카드 */
 div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white'] {
-  width: min(560px, calc(100vw - 32px)) !important;
+  width: min(720px, calc(100vw - 32px)) !important;
   min-height: 300px !important;
   background: rgba(255, 255, 255, 0.72) !important;
   color: #111827 !important;
@@ -650,7 +680,6 @@ div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white
   -webkit-backdrop-filter: blur(18px) !important;
 }
 
-/* 모달 헤더 */
 div[style*='justify-content: space-between'][style*='margin-bottom: 20px'] {
   display: flex !important;
   justify-content: space-between !important;
@@ -668,16 +697,15 @@ div[style*='justify-content: space-between'][style*='margin-bottom: 20px'] h3 {
   color: #0f172a !important;
 }
 
-/* 모달 내부 버튼 */
 div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
   button {
-  height: 46px !important;
-  padding: 0 18px !important;
-  border-radius: 16px !important;
+  height: 40px !important;
+  padding: 0 14px !important;
+  border-radius: 14px !important;
   border: 1px solid rgba(255, 255, 255, 0.24) !important;
   background: rgba(255, 255, 255, 0.56) !important;
   color: #1f2937 !important;
-  font-size: 15px !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
@@ -689,53 +717,86 @@ div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white
   background: rgba(255, 255, 255, 0.76) !important;
 }
 
-/* 수정 input 줄 */
-div[style*='display: flex'][style*='gap: 6px'][style*='align-items: center'] {
-  display: flex !important;
-  gap: 10px !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
-  margin-bottom: 12px !important;
+.transaction-entry {
+  background: rgba(255, 255, 255, 0.52);
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
 }
 
-/* 수정 input */
-div[style*='display: flex'][style*='gap: 6px'][style*='align-items: center']
-  input {
-  height: 48px !important;
-  padding: 0 16px !important;
-  border-radius: 16px !important;
-  border: 1px solid rgba(255, 255, 255, 0.24) !important;
-  background: rgba(255, 255, 255, 0.82) !important;
-  color: #1f2937 !important;
-  font-size: 16px !important;
-  outline: none !important;
+.transaction-entry-body {
+  padding: 0.85rem 1rem;
 }
 
-/* 거래 항목 간격 */
-div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
-  > div:not([style*='justify-content: space-between']) {
-  margin-bottom: 16px !important;
-  padding-bottom: 12px !important;
+.transaction-entry-view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-/* 수정/삭제, 저장/취소 버튼 */
-div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
-  > div
-  > div:last-child {
-  display: flex !important;
-  gap: 10px !important;
-  align-items: center !important;
-  margin: 8px 0 14px !important;
+.transaction-entry-left {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
 }
 
-div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
-  > div
-  > div:last-child
-  button {
-  min-width: 72px !important;
+.transaction-entry-right {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-shrink: 0;
 }
 
-/* 하단 합계 */
+.transaction-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.transaction-badge {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #111827 !important;
+}
+
+.income-entry .transaction-badge {
+  color: #2563eb !important;
+}
+
+.expense-entry .transaction-badge {
+  color: #dc2626 !important;
+}
+
+.transaction-category {
+  font-size: 0.98rem;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.transaction-content {
+  font-size: 0.92rem;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transaction-amount {
+  font-size: 1rem;
+  font-weight: 800;
+  min-width: 90px;
+  color: #111827;
+  text-align: right;
+}
+
+.transaction-actions {
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
 div[style*='margin-top: 20px'] {
   margin-top: 20px !important;
   padding-top: 14px !important;
@@ -766,6 +827,26 @@ div[style*='margin-top: 20px'] {
     width: 54px !important;
     height: 54px !important;
     font-size: 30px !important;
+  }
+
+  .transaction-entry-view,
+  .transaction-entry-left,
+  .transaction-entry-right {
+    flex-wrap: wrap;
+  }
+
+  .transaction-entry-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .transaction-amount {
+    text-align: left;
+  }
+
+  .transaction-actions {
+    width: 100%;
+    justify-content: flex-end;
   }
 }
 </style>
