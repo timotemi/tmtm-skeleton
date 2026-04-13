@@ -1,6 +1,12 @@
 <template>
   <header class="header">
-    <router-link to="/" class="logo">💰 ㅌㅁㅌㅁ</router-link>
+    <router-link to="/" class="logo" aria-label="홈으로 이동">
+      <img
+        src="@/assets/images/logo.png"
+        alt="티모태미 로고"
+        class="logo-image"
+      />
+    </router-link>
 
     <div class="header-actions">
       <button
@@ -41,10 +47,9 @@ const themeStore = useThemeStore();
 }
 
 .logo {
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: var(--text-main);
-  font-size: 22px;
-  font-weight: 700;
   transition:
     transform 0.2s ease,
     opacity 0.2s ease;
@@ -52,7 +57,14 @@ const themeStore = useThemeStore();
 
 .logo:hover {
   transform: translateY(-2px);
-  opacity: 0.85;
+  opacity: 0.9;
+}
+
+.logo-image {
+  height: 46px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .header-actions {

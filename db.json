@@ -15,199 +15,344 @@
       "amount": 2300000
     },
     {
+      "id": 4,
       "name": "ㅈ",
       "email": "w@w",
       "password": "w",
-      "amount": 0,
-      "id": 4
+      "amount": 0
     },
     {
+      "id": 5,
       "name": "성범진",
       "email": "1@1",
       "password": "1",
-      "amount": 100000000,
-      "id": 5
+      "amount": 100000000
     }
   ],
   "transactions": [
     {
-      "id": 3,
+      "id": 1,
       "userId": 2,
-      "date": "2026-04-08",
+      "date": "2026-01-05",
+      "type": "income",
+      "category": "급여",
+      "amount": 1800000,
+      "content": "1월 급여"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "date": "2026-01-07",
       "type": "expense",
-      "category": "카페",
-      "amount": 6500,
-      "content": "아메리카노",
-      "status": "completed"
+      "category": "식비",
+      "amount": 9500,
+      "content": "점심 식사"
     },
     {
       "id": 3,
       "userId": 2,
-      "date": "2026-04-08",
+      "date": "2026-01-12",
       "type": "expense",
-      "category": "카페",
-      "amount": 6500,
-      "content": "아메리카노",
-      "status": "completed"
+      "category": "교통",
+      "amount": 2800,
+      "content": "버스비"
     },
     {
       "id": 4,
-      "userId": 3,
-      "date": "2026-04-13",
+      "userId": 2,
+      "date": "2026-01-20",
       "type": "expense",
-      "category": "보험",
-      "amount": 120000,
-      "content": "보험료 납부 예정",
-      "status": "planned"
+      "category": "쇼핑",
+      "amount": 42000,
+      "content": "후드티 구매"
     },
     {
       "id": 5,
       "userId": 2,
-      "date": "2026-04-01",
+      "date": "2026-02-03",
       "type": "income",
-      "category": "월급",
+      "category": "급여",
       "amount": 1800000,
-      "content": "4월 급여",
-      "status": "completed"
+      "content": "2월 급여"
     },
     {
       "id": 6,
+      "userId": 2,
+      "date": "2026-02-08",
+      "type": "expense",
+      "category": "카페",
+      "amount": 5800,
+      "content": "아이스 아메리카노"
+    },
+    {
+      "id": 7,
+      "userId": 2,
+      "date": "2026-02-11",
+      "type": "expense",
+      "category": "생활",
+      "amount": 12800,
+      "content": "생필품 구매"
+    },
+    {
+      "id": 8,
+      "userId": 2,
+      "date": "2026-02-18",
+      "type": "expense",
+      "category": "통신",
+      "amount": 65000,
+      "content": "휴대폰 요금"
+    },
+    {
+      "id": 9,
+      "userId": 2,
+      "date": "2026-03-02",
+      "type": "income",
+      "category": "급여",
+      "amount": 1800000,
+      "content": "3월 급여"
+    },
+    {
+      "id": 10,
+      "userId": 2,
+      "date": "2026-03-06",
+      "type": "expense",
+      "category": "식비",
+      "amount": 14000,
+      "content": "저녁 식사"
+    },
+    {
+      "id": 11,
+      "userId": 2,
+      "date": "2026-03-10",
+      "type": "expense",
+      "category": "여가",
+      "amount": 17000,
+      "content": "영화 관람"
+    },
+    {
+      "id": 12,
+      "userId": 2,
+      "date": "2026-03-22",
+      "type": "income",
+      "category": "부업",
+      "amount": 90000,
+      "content": "중고거래 판매"
+    },
+    {
+      "id": 13,
+      "userId": 2,
+      "date": "2026-04-01",
+      "type": "income",
+      "category": "급여",
+      "amount": 1800000,
+      "content": "4월 급여"
+    },
+    {
+      "id": 14,
       "userId": 2,
       "date": "2026-04-02",
       "type": "expense",
       "category": "식비",
       "amount": 12000,
-      "content": "점심 식사",
-      "status": "completed"
+      "content": "점심 식사"
     },
     {
-      "id": 7,
+      "id": 15,
       "userId": 2,
       "date": "2026-04-03",
       "type": "expense",
       "category": "교통",
       "amount": 2800,
-      "content": "버스비",
-      "status": "completed"
+      "content": "버스비"
     },
     {
-      "id": 8,
+      "id": 16,
       "userId": 2,
       "date": "2026-04-04",
       "type": "expense",
       "category": "쇼핑",
       "amount": 39000,
-      "content": "티셔츠 구매",
-      "status": "completed"
+      "content": "티셔츠 구매"
     },
     {
-      "id": 9,
+      "id": 17,
       "userId": 2,
       "date": "2026-04-05",
       "type": "expense",
       "category": "식비",
       "amount": 18500,
-      "content": "저녁 배달",
-      "status": "completed"
+      "content": "저녁 배달"
     },
     {
-      "id": 10,
+      "id": 18,
       "userId": 2,
       "date": "2026-04-06",
       "type": "expense",
       "category": "생활",
       "amount": 7200,
-      "content": "세제 구매",
-      "status": "completed"
+      "content": "세제 구매"
     },
     {
-      "id": 12,
+      "id": 19,
+      "userId": 2,
+      "date": "2026-04-08",
+      "type": "expense",
+      "category": "카페",
+      "amount": 6500,
+      "content": "아메리카노"
+    },
+    {
+      "id": 20,
       "userId": 2,
       "date": "2026-04-09",
       "type": "expense",
       "category": "고정지출",
       "amount": 549998,
-      "content": "월세",
-      "status": "completed"
+      "content": "월세"
     },
     {
-      "id": 13,
+      "id": 21,
       "userId": 2,
       "date": "2026-04-10",
       "type": "expense",
       "category": "통신",
       "amount": 65000,
-      "content": "휴대폰 요금",
-      "status": "completed"
+      "content": "휴대폰 요금"
     },
     {
-      "id": 14,
+      "id": 22,
       "userId": 2,
       "date": "2026-04-11",
       "type": "expense",
       "category": "교통",
       "amount": 1350,
-      "content": "지하철 환승",
-      "status": "completed"
+      "content": "지하철 환승"
     },
     {
-      "id": 15,
+      "id": 23,
       "userId": 2,
       "date": "2026-04-12",
       "type": "expense",
       "category": "식비",
       "amount": 9500,
-      "content": "김밥과 음료",
-      "status": "completed"
+      "content": "김밥과 음료"
     },
     {
-      "id": 16,
+      "id": 24,
       "userId": 2,
       "date": "2026-04-14",
       "type": "expense",
       "category": "문화",
       "amount": 15000,
-      "content": "영화 관람",
-      "status": "completed"
+      "content": "영화 관람"
     },
     {
-      "id": 17,
+      "id": 25,
       "userId": 2,
       "date": "2026-04-15",
       "type": "expense",
       "category": "식비",
       "amount": 22000,
-      "content": "외식",
-      "status": "completed"
+      "content": "외식"
     },
     {
-      "id": 18,
+      "id": 26,
       "userId": 2,
       "date": "2026-04-16",
       "type": "income",
-      "category": "부수입",
+      "category": "부업",
       "amount": 120000,
-      "content": "중고거래 판매",
-      "status": "completed"
+      "content": "중고거래 판매"
     },
     {
-      "id": 20,
+      "id": 27,
       "userId": 2,
       "date": "2026-04-18",
       "type": "expense",
       "category": "쇼핑",
       "amount": 48000,
-      "content": "운동화 할인 구매",
-      "status": "completed"
+      "content": "운동화 할인 구매"
     },
     {
+      "id": 28,
       "userId": 2,
-      "date": "2026-04-10",
+      "date": "2026-05-03",
+      "type": "income",
+      "category": "급여",
+      "amount": 1800000,
+      "content": "5월 급여"
+    },
+    {
+      "id": 29,
+      "userId": 2,
+      "date": "2026-05-07",
       "type": "expense",
-      "category": "문화",
-      "amount": 3,
-      "content": "asd",
-      "id": 21
+      "category": "식비",
+      "amount": 11000,
+      "content": "김치찌개"
+    },
+    {
+      "id": 30,
+      "userId": 2,
+      "date": "2026-05-14",
+      "type": "expense",
+      "category": "카페",
+      "amount": 6200,
+      "content": "라떼"
+    },
+    {
+      "id": 31,
+      "userId": 2,
+      "date": "2026-05-19",
+      "type": "expense",
+      "category": "교통",
+      "amount": 3000,
+      "content": "지하철"
+    },
+    {
+      "id": 32,
+      "userId": 2,
+      "date": "2026-06-04",
+      "type": "income",
+      "category": "급여",
+      "amount": 1800000,
+      "content": "6월 급여"
+    },
+    {
+      "id": 33,
+      "userId": 2,
+      "date": "2026-06-09",
+      "type": "expense",
+      "category": "생활",
+      "amount": 18900,
+      "content": "세면용품 구매"
+    },
+    {
+      "id": 34,
+      "userId": 2,
+      "date": "2026-06-13",
+      "type": "expense",
+      "category": "여가",
+      "amount": 25000,
+      "content": "볼링"
+    },
+    {
+      "id": 35,
+      "userId": 2,
+      "date": "2026-06-21",
+      "type": "income",
+      "category": "용돈",
+      "amount": 50000,
+      "content": "가족 용돈"
+    },
+    {
+      "id": 36,
+      "userId": 3,
+      "date": "2026-04-13",
+      "type": "expense",
+      "category": "보험",
+      "amount": 120000,
+      "content": "보험료 납부 예정"
     }
   ]
 }

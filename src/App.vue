@@ -6,7 +6,7 @@
     <main
       :class="[
         showLayout ? 'main-content' : 'auth-content',
-        isChatbotPage ? 'chatbot-scroll' : '',
+        isScrollablePage ? 'page-scroll' : '',
       ]"
     >
       <RouterView />
@@ -26,8 +26,8 @@ const showLayout = computed(() => {
   return !['login', 'signup'].includes(route.name);
 });
 
-const isChatbotPage = computed(() => {
-  return route.name === 'chatbot';
+const isScrollablePage = computed(() => {
+  return ['transactions-list', 'chatbot'].includes(route.name);
 });
 </script>
 
@@ -50,13 +50,14 @@ const isChatbotPage = computed(() => {
   box-sizing: border-box;
 }
 
-.main-content.chatbot-scroll {
+.main-content.page-scroll {
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 .auth-content {
   min-height: 100vh;
+  overflow: hidden;
 }
 
 * {
