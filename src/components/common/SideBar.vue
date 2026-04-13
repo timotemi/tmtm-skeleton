@@ -4,10 +4,10 @@
       <router-link to="/" class="menu-item">홈</router-link>
       <router-link to="/calendar" class="menu-item">캘린더</router-link>
       <router-link to="/transactions-list" class="menu-item"
-        >전체거래목록</router-link
+        >전체 거래 목록</router-link
       >
       <router-link to="/monthly-summary" class="menu-item"
-        >월별요약</router-link
+        >월별 요약</router-link
       >
       <router-link to="/chatbot" class="menu-item"> 소비패턴 챗봇 </router-link>
     </nav>

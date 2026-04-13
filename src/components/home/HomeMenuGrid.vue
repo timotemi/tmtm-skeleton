@@ -3,8 +3,8 @@
     <div class="menu-grid">
       <router-link to="/transactions-list" class="menu-card">
         <div class="menu-icon">📋</div>
-        <h3>최근 거래내역</h3>
-        <p>가장 최근 거래를 확인해보세요.</p>
+        <h3>전체 거래 목록</h3>
+        <p>전체 거래 목록을 확인해보세요.</p>
       </router-link>
 
       <router-link to="/monthly-summary" class="menu-card">
