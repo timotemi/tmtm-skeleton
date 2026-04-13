@@ -7,7 +7,7 @@
             <button @click="prevYear">&lt;&lt;</button>
             <button @click="prevMonth">&lt;</button>
             <span @dblclick="goToday" style="cursor: pointer">
-              {{ year }}년-{{ month + 1 }}월-{{ date }}일
+              {{ year }}년 {{ month + 1 }}월 {{ date }}일
               {{ weekDays[day] }}요일
             </span>
             <button @click="nextMonth">&gt;</button>
@@ -205,7 +205,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import {
   getTransactionsByUserId,
@@ -214,10 +215,21 @@ import {
 } from '@/api/transaction';
 
 const authStore = useAuthStore();
-const weekDays = ['일', '월', '수', '목', '금', '토'];
-weekDays.splice(2, 0, '화');
+const route = useRoute();
+const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
 
 const currentDate = ref(new Date());
+const selectedDate = ref(new Date());
+const isDetailModalOpen = ref(false);
+const transactions = ref([]);
+const selectedTransactions = ref([]);
+const editingId = ref(null);
+
+const editForm = ref({
+  category: '',
+  content: '',
+  amount: 0,
+});
 
 const year = computed(() => currentDate.value.getFullYear());
 const month = computed(() => currentDate.value.getMonth());
@@ -247,6 +259,25 @@ const calendarTable = computed(() => {
   return days;
 });
 
+const parseQueryNumber = (value, fallback) => {
+  const parsed = Number(value);
+  return Number.isInteger(parsed) ? parsed : fallback;
+};
+
+const syncCalendarFromQuery = () => {
+  const now = new Date();
+  const queryYear = parseQueryNumber(route.query.year, now.getFullYear());
+  const queryMonth = parseQueryNumber(route.query.month, now.getMonth() + 1);
+  const queryDate = parseQueryNumber(route.query.date, now.getDate());
+  const safeMonth = Math.min(Math.max(queryMonth, 1), 12);
+  const lastDayOfMonth = new Date(queryYear, safeMonth, 0).getDate();
+  const safeDate = Math.min(Math.max(queryDate, 1), lastDayOfMonth);
+  const targetDate = new Date(queryYear, safeMonth - 1, safeDate);
+
+  currentDate.value = targetDate;
+  selectedDate.value = targetDate;
+};
+
 const prevYear = () => {
   currentDate.value = new Date(year.value - 1, month.value, date.value);
 };
@@ -264,7 +295,9 @@ const nextYear = () => {
 };
 
 const goToday = () => {
-  currentDate.value = new Date();
+  const today = new Date();
+  currentDate.value = today;
+  selectedDate.value = today;
 };
 
 const getDayColor = (index) => {
@@ -284,8 +317,6 @@ const isToday = (item) => {
   );
 };
 
-const selectedDate = ref(new Date());
-
 const formatDate = (dateObj) => {
   const y = dateObj.getFullYear();
   const m = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -302,10 +333,6 @@ const isSelected = (item) => {
     selectedDate.value.getDate() === item
   );
 };
-
-const isDetailModalOpen = ref(false);
-const transactions = ref([]);
-const selectedTransactions = ref([]);
 
 const loadTransactions = async () => {
   try {
@@ -404,14 +431,6 @@ const deleteTransaction = async (id) => {
   }
 };
 
-const editingId = ref(null);
-
-const editForm = ref({
-  category: '',
-  content: '',
-  amount: 0,
-});
-
 const startEdit = (item) => {
   editingId.value = item.id;
   editForm.value = {
@@ -449,7 +468,16 @@ const saveEdit = async (id) => {
 
 onMounted(async () => {
   await loadTransactions();
+  syncCalendarFromQuery();
 });
+
+watch(
+  () => route.query,
+  () => {
+    syncCalendarFromQuery();
+  },
+  { deep: true },
+);
 </script>
 
 <style scoped>
@@ -474,7 +502,7 @@ div > div[style*='width: 680px'] > div {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14) !important;
 }
 
-/* 상단 월 이동 영역 */
+/* 상단 이동 영역 */
 div[style*='text-align: center'][style*='align-content: center'] {
   display: flex !important;
   justify-content: center !important;
@@ -541,7 +569,7 @@ div[style*='display: grid'][style*='grid-template-columns: repeat(7, 1fr)'][styl
   background: transparent !important;
 }
 
-/* 날짜 셀 - 살짝 작게 */
+/* 날짜 칸 */
 div[style*='height: 100px'][style*='textAlign: center'] {
   height: 92px !important;
   min-height: 92px !important;
@@ -566,7 +594,7 @@ div[style*='height: 100px'][style*='textAlign: center']
   margin-bottom: 4px !important;
 }
 
-/* 셀 내부 금액 */
+/* 일별 금액 */
 div[style*='margin-top: 6px'][style*='font-size: 12px'][style*='flex-direction: column'] {
   margin-top: 4px !important;
   gap: 2px !important;
@@ -640,7 +668,7 @@ div[style*='justify-content: space-between'][style*='margin-bottom: 20px'] h3 {
   color: #0f172a !important;
 }
 
-/* 모달 내부 버튼 공통 */
+/* 모달 내부 버튼 */
 div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
   button {
   height: 46px !important;
@@ -683,14 +711,14 @@ div[style*='display: flex'][style*='gap: 6px'][style*='align-items: center']
   outline: none !important;
 }
 
-/* 거래 항목 줄간격 */
+/* 거래 항목 간격 */
 div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
   > div:not([style*='justify-content: space-between']) {
   margin-bottom: 16px !important;
   padding-bottom: 12px !important;
 }
 
-/* 수정/삭제, 저장/취소 버튼 띄우기 */
+/* 수정/삭제, 저장/취소 버튼 */
 div[style*='width: 500px'][style*='min-height: 300px'][style*='background: white']
   > div
   > div:last-child {
